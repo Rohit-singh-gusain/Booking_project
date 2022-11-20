@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Comfortaa;
+    text-decoration: none;
+    color: unset;
+}
+/* Div του header */
+.admin-section-header {
+    color: #FFF;
+    width: 100%;
+    background: linear-gradient(90deg, rgba(34,51,73,1) 0%, rgba(117,39,242,1) 64%, rgba(215,19,19,1) 100%);
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    box-shadow: 4px 2px 4px 4px #8c8c8c;
+}
+
+/* Logo στο admin dashboard */
+.admin-logo {
+    padding: 15px 0;
+    justify-content: center;
+    background-color: #373077
+}
+.logo {
+    width: 250px;    
+}
+
+/* Div που περιέχει το όνομα του συνδεμένου χρήστη και το icon */
+.admin-login-info {
+    margin-right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.admin-login-info i {
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+/* Sidebar του admin-header.php */
+.admin-section1 {
+    background-color: #373077;
+    height: 100vh;
+    box-shadow: 4px 2px 4px 4px #2a245b;
+}
+.admin-section1 ul li {
+    width: 100%;
+    padding: 20px 10px;
+    background: transparent;
+    color: #FFF;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+.admin-section1 ul li:hover {
+    background-color: #2d2760;
+    color: #fff;
+    border-left: #fff 3px solid;
+}
+.admin-section1 ul li i {
+    margin-right: 20px;
+}
+
+/* Sidebar του admin-movies-header.php */
+.admin-section3 {
+    background-color: #373077;
+    height: 100%;
+    box-shadow: 4px 2px 4px 4px #2a245b;
+}
+.admin-section3 ul li {
+    width: 100%;
+    padding: 20px 10px;
+    background: transparent;
+    color: #FFF;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+.admin-section3 ul li:hover {
+    background-color: #2d2760;
+    color: #fff;
+    border-left: #fff 3px solid;
+}
+.admin-section3 ul ul {
+    background-color: #4e4e4e;
+    margin-bottom: 1px;
+}
+.admin-section3 ul ul li {
+    background-color: #4e4e4e;
+    margin-bottom: 1px;
+}
+.admin-section3 ul li i {
+    margin-right: 20px;
+}
+
+/* Div για τα περιεχόμενα των σελίδων */
+.admin-container {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+.admin-section2 {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 40px;
+    margin-left: 5px;
+}
+.admin-section-column {
+    flex: 50%;
+    max-width: 100%;
+    padding: 0 10px;
+}
+
+/*  Div των στατιστικών στο admin dashboard */
+.admin-section-panel {
+    width: 100%;
+    vertical-align: middle;
+    background-color: #FFF;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.40);
+    -moz-box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.40);
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.40);
+    padding: 20px;
+    margin: 20px 0;
+}
+.admin-section-stats {
+    justify-content: center;
+    display: flex;
+    padding: 20px 0;
+}
+.admin-section-stats-panel {
+    flex: 25%;
+    max-width: 25%;
+    text-align: center;
+    border-right: #bdbdbd 1px solid;
+}
+.admin-section-stats-panel>i {
+    font-size: 30px;
+    color: white;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    line-height: 60px;
+    transition: all 0.5s ease;
+    margin-bottom: 10px;
+}
+
+/* Div Booking και Add Movie του admin dashboard */
+.admin-panel-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+    border-bottom: #c7c7c7 1px solid;
+}
+.admin-panel-section-header>h2 {
+    color: #6e6e6e;
+}
+
+/* Div που περιέχει τα bookings */
+.admin-panel-section-booking-item {
+    background-color: none;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    border: #969696 1px solid;
+    margin: 10px 0;
+    overflow: hidden;
+    display: flex;
+    transition: all 0.6s ease;
+}
+.admin-panel-section-booking-item:hover {
+    background-color: #f4f4f4;
+    border: #ff0000 1px solid;
+}
+.admin-panel-section-booking-info div:first-child {
+    border-bottom: #d3d3d3 1px solid;
+}
+.admin-panel-section-booking-info {
+    margin: 10px 10px;
+    display: flex;
+    flex: 100%;
+    flex-direction: column;
+    color: #6e6e6e;
+}
+.admin-panel-section-booking-info>div {
+    height: 100%;
+    display: flex;
+}
+.admin-panel-section-booking-info>div>* {
+    display: inline-block;
+    margin: auto 5px;
+}
+.admin-panel-section-booking-response i {
+    font-size: 25px;
+    height: 80px;
+    width: 50px;
+    color: #FFF;
+    line-height: 100px;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+}
+
+/* Delete icon στα movies και τα bookings */
+.admin-panel-section-booking-response .delete-icon {
+    background-color: #ab1111;
+    height: 115px;
+    transition: all 0.7s ease;
+}
+.admin-panel-section-booking-response .delete-icon:hover{
+    background-color: #ce0b0b;
+}
+
+/* Edit icon στα movies */
+.admin-panel-section-booking-response .edit-icon {
+    transition: all 0.7s ease;
+    background-color: #432e8d;
+}
+.admin-panel-section-booking-response .edit-icon:hover {
+    background-color: #612dca;
+}
+
+/* Μήνυμα όταν δεν υπάρχουν εγγραφές */
+.no-annot {
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* View all bookings button στο admin panel */
+.view-all-btn {
+    border-radius: 4px;
+    border: none;
+    padding: 10px;
+    width: 49%;
+    text-align: center;
+    background-color: #bf1313;
+    color: #FFF;
+    transition: all 0.7s ease;
+    cursor: pointer;
+    height: 42px;
+}
+.view-all-btn:hover {
+    background-color: #373077;
+}
+
+/* Div για τις φόρμες προσθήκης ταινίας και δημιουργίας κράτησης */
+.admin-section-panel2 form {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.admin-section-panel2 form input {
+    border-radius: 4px;
+    border: 1px solid #6e6e6e;
+    padding: 10px;
+    width: 32%;
+    height: 42px;
+    margin: 5px 0;
+}
+.admin-section-panel2 form input[type="file"] {
+    width: 35%;
+    padding-left: 25px;
+    padding-top: 6px;
+}
+.admin-section-panel2 form button {
+    border-radius: 4px;
+    border: none;
+    padding: 10px;
+    width: 49%;
+    text-align: center;
+    background-color: #bf1313;
+    color: #FFF;
+    transition: all 0.7s ease;
+    cursor: pointer;
+    height: 42px;
+}
+.admin-section-panel2 form button:hover {
+    background-color: #373077;
+}
+
+/* Div για την μεταφόρτωση των εικόνων στο add movie */
+.upload-file {
+    margin-left: auto;
+    margin-right: auto;
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    margin-bottom: 10px;
+}
+/* Button για την μεταφόρτωση των εικόνων στο add movie */
+#moviebtn {
+    padding-right: 100px;
+    border: 0;
+    margin-top: 20px;
+}
+
+/* CSS για responsiveness */
+@media all and (max-width:30em) {
+    a.movie-book-btn {
+        display: block;
+        margin: 0.4em auto;
+    }
+}
+
+/* Κλάσεις για τη λειτουργία της Javascript */
+.hidden-div {
+    display: none;
+    transition: all 0.7s ease;
+}
+.show {
+    display: block;
+    transition: all 0.7s ease;
+}

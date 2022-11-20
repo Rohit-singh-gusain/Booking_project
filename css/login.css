@@ -1,0 +1,128 @@
+*
+{
+	margin:0;
+	padding: 0;
+}
+html,body {
+	height: 100%;
+}
+
+body.login-form {
+	background-color: #f7f9fb;
+	font-size: 14px;
+	position:relative;
+}
+/* Div της φόρμας */
+.login-form .card.fat .card-body {
+	padding: 15px;
+}
+#fbody {
+	overflow: hidden;
+	height: 285px;
+	border-bottom: 1.8px solid #dfdfdf;
+	border-radius: .30rem;
+}
+.login-form .form.fat {
+	padding: 10px;
+}
+
+/* Logo πάνω από τη φόρμα */
+.login-form .brand {
+	width: 100%;
+	height: 90px;
+	overflow: hidden;
+	margin: 40px auto;
+	position: relative;
+	z-index: 1;
+}
+
+/* Button εναλλαγής μεταξύ login και register */
+.button-box {
+	width: 220px;
+	margin: 35px auto;
+	position: relative;
+	box-shadow: 0 0 20px 9px #e412123f;
+	border-radius: 30px;
+}
+.toggle-btn {
+	padding: 10px 30px;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	outline: none;
+	position: relative;
+	color: rgb(0, 0, 0);
+}
+#swapbtn {
+	top:0;
+	left:0;
+	position: absolute;
+	width: 110px;
+	height: 100%;
+	background: linear-gradient(90deg, rgba(252,0,0,1) 0%, rgba(194,16,16,1) 69%, rgba(138,27,105,1) 89%, rgba(63,85,201,1) 100%);
+	border-radius: 30px;
+	transition: .5s;
+}
+
+/* Περίγραμμα όταν γίνεται κλικ σε κάποιο button */
+button:focus {
+	outline:0;
+}
+
+/* Login Form */
+#login {
+	position:relative;
+	left:0px;
+}
+
+/* Register Form */
+#register {
+	margin-top: -280px;
+	position: relative;
+	left:450px;
+}
+
+/* Τίτλος της φόρμας */
+.login-form .card .-title {
+	margin-bottom: 30px;
+}
+
+/* Labels των fields */
+.login-form .form-group label {
+	width: 100%;
+}
+
+/* Input Fields */
+.login-form .form-control {
+	border-width: 2.3px;
+}
+
+/* Login Button */
+.login-form .btn.btn-block {
+	padding: 12px 10px;
+    background-color:#d71313; ;
+}
+
+/* Footer */
+.login-form .footer {
+	margin: 40px 0;
+	color: #888;
+	text-align: center;
+}
+
+/* CSS για responsiveness */
+@media screen and (max-width: 425px) {
+	.login-form .card-wrapper {
+		width: 90%;
+		margin: 0 auto;
+	}
+} 
+@media screen and (max-width: 320px) {
+	.login-form .card.fat {
+		padding: 0;
+	}
+	.login-form .card.fat .card-body{
+		padding: 15px;
+	}
+	
+}
