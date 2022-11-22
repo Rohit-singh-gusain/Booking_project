@@ -18,7 +18,7 @@ Below are some screenshots of the application's user interface:
 - Admin Account:    
     username: admin1    
     password: admin123
-- User Account: 
+- User Account:     
     username: user  
     password: ChrisBandis1
 
