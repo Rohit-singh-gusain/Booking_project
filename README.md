@@ -15,15 +15,17 @@ Below are some screenshots of the application's user interface:
 - Database connection credentials can be changed in /database/config.php.
 - Admin Dashboard URL: /admin/index.php
 - Admin Account:
-    username: admin1
+    username: admin1    
     password: admin123
 - User Account:
-    username: user
+    username: user  
     password: ChrisBandis1
 
 **Known Issues**
 
 There is no full support for smaller resolutions by the application as there is a problem in displaying the menu on the movie pages as well as, the size of the frame containing the booking form becomes smaller than the size of the form and consequently the size of the image representing the seats of the cinema changes (see images below). 
 
-![Issue1](https://user-images.githubusercontent.com/91207835/203423136-ab609e23-b1a9-42af-9ecd-4f21784efe53.png)
-![Issue2](https://user-images.githubusercontent.com/91207835/203423180-7109932f-633a-43cd-b515-9b22da441368.png)
+![Issue1](https://user-images.githubusercontent.com/91207835/203423924-63191056-9ff7-4f13-a15f-8fbeb589e223.png)
+![Issue2](https://user-images.githubusercontent.com/91207835/203423977-9d959e07-89ec-43ac-a81a-94741ecb863b.png)
+
+
