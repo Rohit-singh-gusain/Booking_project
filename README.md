@@ -14,10 +14,10 @@ Below are some screenshots of the application's user interface:
 **Good to Know**
 - Database connection credentials can be changed in /database/config.php.
 - Admin Dashboard URL: /admin/index.php
-- Admin Account:
+- Admin Account:    
     username: admin1    
     password: admin123
-- User Account:
+- User Account: 
     username: user  
     password: ChrisBandis1
 
