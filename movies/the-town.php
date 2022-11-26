@@ -125,7 +125,7 @@ echo '<script type="text/javascript">alert("' . $msg . '");window.location = "' 
               document.getElementById("seats").innerHTML = "<?php echo "Available seats: " . $seats?>";
             </script>
     </div>   
-    <div class="container-time"><img src="../images/cinema-seats.png" style="width: 90%; height:750px;"></div> <!-- Div containing image with movie seats -->
+    <div class="container-time"><img src="../images/cinema-seats.png" style="width: 90%; height:750px;"></div> <!-- Div containing an image with the cinema seats -->
   </div>    
 
   <?php 
