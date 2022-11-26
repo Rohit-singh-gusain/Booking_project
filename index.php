@@ -1,38 +1,38 @@
 <?php 
 require 'database/Db.class.php'; //Call the necessary class file (Db.class.php) to connect to the database and run queries
-require 'includes/header.php'; //Κλήση του απαραίτητου για την εκτέλεση του παρακάτω κώδικα αρχείου, header.php 
+require 'includes/header.php'; //Call the file necessary to execute the following code, header.php
 
-$db = new Db(); //Δημιουργία object της κλάσης Db
+$db = new Db(); //Create a Db class object
 
-$trend1 = $db->get_movie(5); //Αποθήκευση του αποτελέσματος της function get_movie της κλάσης Db στη μεταβλητή $trend1
-$trend1Cover = substr($trend1['movieCover'],3); //Χρήση της μεθόδου "substr" καθώς, η τιμή του movieCover στη βάση δεδομένων ξεκινάει με "../"
+$trend1 = $db->get_movie(5); //Save the result of function get_movie of the DB class in the $trend1 variable
+$trend1Cover = substr($trend1['movieCover'],3); //Using the "substr" method as, the movie Cover value in the database starts with ".. /"
 
-$trend2 = $db->get_movie(6); //Αποθήκευση του αποτελέσματος της function get_movie της κλάσης Db στη μεταβλητή $trend2
+$trend2 = $db->get_movie(6); //Save the result of function get_movie of the DB class in the $trend2 variable
 $trend2Cover = substr($trend2['movieCover'],3); 
 
-$trend3 = $db->get_movie(8); //Αποθήκευση του αποτελέσματος της function get_movie της κλάσης Db στη μεταβλητή $trend3
+$trend3 = $db->get_movie(8); //Save the result of function get_movie of the DB class in the $trend3 variable
 $trend3Cover = substr($trend3['movieCover'],3); 
 
-$movcol1sql = $db->get_home_movies_col1(); //Αποθήκευση του αποτελέσματος της function get_home_movies_col1 της κλάσης Db στη μεταβλητή $movcol1sql
-$movcol2sql = $db->get_home_movies_col2(); //Αποθήκευση του αποτελέσματος της function get_home_movies_col2 της κλάσης Db στη μεταβλητή $movcol2sql
+$movcol1sql = $db->get_home_movies_col1(); //Save the result of function get_home_movies_col1 of the DB class in the $movcol1sql variable
+$movcol2sql = $db->get_home_movies_col2(); //Save the result of function get_home_movies_col2 of the DB class in the $movcol2sql variable
 
 ?>
 
-    <div class="container trending-movies">  <!-- Div για το trending slider -->
+    <div class="container trending-movies">  <!-- Div for the trending slider -->
         <h1>Trending Movies&#128293;</h1>
         <br>
         <div class="slideshow-container">
             <div class="mySlides">
                 <div class="row">
                     <div class="col-md-6 left-box">
-                        <h2><?php echo $trend1['movieTitle']; ?></h2> <!-- Εμφάνιση του τίτλου της ταινίας δυναμικά από τη βάση δεδομένων -->
-                        <p><?php echo $trend1['movieDesc']; ?></p> <!-- Εμφάνιση της περιγραφής της ταινίας δυναμικά από τη βάση δεδομένων -->
-                        <p>Genre: <?php echo $trend1['movieGenre']; ?></p> <!-- Εμφάνιση του είδους της ταινίας δυναμικά από τη βάση δεδομένων -->
-                        <p>Cast: <?php echo $trend1['movieCast']; ?></p> <!-- Εμφάνιση των ηθοποιών που συμμετέχουν στη ταινία δυναμικά από τη βάση δεδομένων -->
-                        <a href= <?php echo "movies/" . $trend1['movieLink'] . ".php"; ?>><i class="fas fa-ticket-alt"></i> Book Now!</a> <!-- Εισαγωγή του link της ταινίας δυναμικά από τη βάση δεδομένων -->
+                        <h2><?php echo $trend1['movieTitle']; ?></h2> <!-- Display the movie title dynamically from the database-->
+                        <p><?php echo $trend1['movieDesc']; ?></p> <!-- Display the movie description dynamically from the database -->
+                        <p>Genre: <?php echo $trend1['movieGenre']; ?></p> <!-- Display the movie genre dynamically from the database -->
+                        <p>Cast: <?php echo $trend1['movieCast']; ?></p> <!-- Appearance of the actors participating in the film dynamically from the database -->
+                        <a href= <?php echo "movies/" . $trend1['movieLink'] . ".php"; ?>><i class="fas fa-ticket-alt"></i> Book Now!</a> <!-- Insert the movie link dynamically from the database -->
                     </div>
                     <div class="col-md-6 text-center">
-                        <img src="<?php echo $trend1Cover;?>" class="movie-img"> <!-- Εμφάνιση του τίτλου δυναμικά από τη βάση δεδομένων -->
+                        <img src="<?php echo $trend1Cover;?>" class="movie-img"> <!-- Display the title dynamically from the database-->
                     </div>
                 </div>
             </div>
@@ -69,13 +69,13 @@ $movcol2sql = $db->get_home_movies_col2(); //Αποθήκευση του απο�
         </div>
         <br>
 
-        <div style="text-align:center" id="gotomovies"> <!-- Div για τα bullets του slider καθώς και προορισμός του κουμπιού "Movies" του μενού -->
+        <div style="text-align:center" id="gotomovies"> <!-- Div for the slider bullets as well as destination of the "Movies" button of the menu -->
         <span class="dot" onclick="currentSlide(1)"></span> 
         <span class="dot" onclick="currentSlide(2)"></span> 
         <span class="dot" onclick="currentSlide(3)"></span> 
-        </div> <!--  Κλείνει το div των bullet -->
+        </div> <!--  End of the bullet div -->
 
-        <script> //Javascript για τη σωστή λειτουργία των bullets του slider
+        <script> //Javascript for the proper functioning of the slider bullets
             var slideIndex = 1;
             showSlides(slideIndex);
 
@@ -103,18 +103,18 @@ $movcol2sql = $db->get_home_movies_col2(); //Αποθήκευση του απο�
                 dots[slideIndex-1].className += " active";
             }
         </script>
-    </div> <!-- Κλείσιμο του slider div -->
+    </div> <!-- End of the slider div -->
 
-    <div class="container movies"> <!-- Div για τις ταινίες -->
+    <div class="container movies"> <!-- Div for the movies -->
         <br>
         <h1>Movies &#127916;</h1>
-        <div class="row">   <!-- Χρήση bootstrap για τη δημιουργία των δύο στηλών που περιέχουν τις ταινίες -->
+        <div class="row">   <!-- Use bootstrap to create the two columns that contain the movies -->
             <div class="col-md-6">
                 <div class="row">
                 <?php               
-                    if(mysqli_num_rows($movcol1sql) > 0){   //Δυναμική απεικόνιση του περιεχομένου της μεταβλητής $movcol1sql
+                    if(mysqli_num_rows($movcol1sql) > 0){   //Dynamic visualization of the content of the $movcol1sql variable
                         while($row = mysqli_fetch_array($movcol1sql)){
-                            $movcolCover = substr($row['movieCover'],3); //Χρήση της μεθόδου "substr" καθώς, η τιμή του movieCover στη βάση δεδομένων ξεκινάει με "../"
+                            $movcolCover = substr($row['movieCover'],3); //Using the "substr" method as, the movie Cover value in the database starts with ".. /"
                             echo '<div class="col-6"><a href="movies/'. $row['movieLink'].'.php"> <img src="'.$movcolCover.'"> </a></div>';
                         }
                     }                         
@@ -122,7 +122,7 @@ $movcol2sql = $db->get_home_movies_col2(); //Αποθήκευση του απο�
                 echo '</div>';
                 echo '<div class="col-md-6">';
                 echo '<div class="row">';                
-                    if(mysqli_num_rows($movcol2sql) > 0){   //Δυναμική απεικόνιση του περιεχομένου της μεταβλητής $movcol2sql
+                    if(mysqli_num_rows($movcol2sql) > 0){   //Dynamic visualization of the content of the $movcol2sql variable
                         while($row = mysqli_fetch_array($movcol2sql)){
                             $movcolCover = substr($row['movieCover'],3);
                             echo '<div class="col-6"><a href="movies/'. $row['movieLink'].'.php"> <img src="'.$movcolCover.'"> </a></div>';
@@ -133,4 +133,4 @@ $movcol2sql = $db->get_home_movies_col2(); //Αποθήκευση του απο�
         </div>
     </div>
   
-<?php require 'includes/footer.php' ?>  <!-- Κλήση του απαραίτητου για την εκτέλεση του παραπάνω κώδικα αρχείου, footer.php -->
+<?php require 'includes/footer.php' ?>  <!-- Call the file necessary to execute the above code, footer.php -->
