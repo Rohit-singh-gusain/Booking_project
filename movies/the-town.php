@@ -155,7 +155,7 @@ echo '<script type="text/javascript">alert("' . $msg . '");window.location = "' 
   if(isset($_POST['submit']))  //Check if the submit button has been pressed by the user and run the function create_booking of the DB class in the database
   {
     $db->create_booking("$movieID", "$fname", "$lname", "$email", "$phone", "$date", "$hour", "$row", "$col", "$username");
-    phpAlert("Your booking for the movie " . $movieTitle . " was successful!"); //Μήνυμα επιτυχούς εισαγωγής                    
+    phpAlert("Your booking for the movie " . $movieTitle . " was successful!"); //Successful booking message                       
   }
 echo '</div>'; //End of the div for page content
 require '../includes/movie-footer.php'; //Call the file necessary to execute the above code, movie-footer.php 
