@@ -1,20 +1,20 @@
 <?php 
-require 'database/Db.class.php'; //Κλήση του απαραίτητου για την σύνδεση με τη βάση δεδομένων και την εκτέλεση ερωτημάτων αρχείου κλάσης Db.class.php
-require 'includes/booking-about-header.php'; //Κλήση του απαραίτητου για την εκτέλεση του παρακάτω κώδικα αρχείου, booking-about-header.php 
+require 'database/Db.class.php'; //Call the necessary class file (Db.class.php) to connect to the database and run queries
+require 'includes/booking-about-header.php'; //Call the file necessary to execute the following code, booking-about-header.php 
 
-$db = new Db(); //Δημιουργία object της κλάσης Db
+$db = new Db(); //Create a Db class object
 
-if(!isset($_SESSION['login'])) //Έλεγχος αν υπάρχει συνδεμένος χρήστης. Αν δεν υπάρχει, τότε γίνεται ανακατεύθυνση στην αρχική σελίδα.
+if(!isset($_SESSION['login'])) //Check if there is a logged-in user. if it does not exist then redirect to the homepage 
 {
     header('Location: home.php');
 }
 
-$userBookings = $db->get_user_bookings($username);  //Αποθήκευση του αποτελέσματος της function get_user_bookings της κλάσης Db στη μεταβλητή $userBookings
-                                                    //Η μεταβλητή $username δημιουργήθηκε στο booking-about-header.php
+$userBookings = $db->get_user_bookings($username);  //Save the result of function get_user_bookings of the DB class in the $userBookings variable
+                                                    //The variable $username was created in booking-about-header.php
                                                                                                                                                        
 ?>                                                                                                                                                      
 
-    <div class="admin-section admin-section2"> <!-- Div με τα περιεχόμενα του booking history για τον συνδεμένο χρήστη -->
+    <div class="admin-section admin-section2"> <!-- Div with the contents of the booking history for the logged-in user -->
         <div class="admin-section-column">
             <div class="admin-section-panel admin-section-panel1">
                         <div class="admin-panel-section-header">
@@ -23,7 +23,7 @@ $userBookings = $db->get_user_bookings($username);  //Αποθήκευση το�
                         <div class="admin-panel-section-content">
                             <?php
                                 if(mysqli_num_rows($userBookings) > 0){
-                                    while($row = mysqli_fetch_array($userBookings)){ //Για όσο υπάρχουν αποθηκευμένα δεδομένα στη μεταβλητή $userBookings, αυτά να εμφανίζονται παρακάτω δυναμικά από τη βάση
+                                    while($row = mysqli_fetch_array($userBookings)){ //For as long as data is stored in the $userBookings variable, display it below dynamically from the database
                                         echo "<div class=\"admin-panel-section-booking-item\">\n";
                                         echo "      <div class=\"admin-panel-section-booking-info\">\n";
                                         echo "            <div>\n";
@@ -49,4 +49,4 @@ $userBookings = $db->get_user_bookings($username);  //Αποθήκευση το�
         </div>
     </div>
 </div>
-<?php require 'includes/footer.php' ?> <!-- Κλήση του απαραίτητου για την εκτέλεση του παραπάνω κώδικα αρχείου, footer.php -->
+<?php require 'includes/footer.php' ?> <!-- Call the file necessary to execute the above code, footer.php -->
