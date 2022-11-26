@@ -1,8 +1,8 @@
 <?php
-session_start(); //Εκκίνηση του session
-require 'database/Db.class.php'; //Κλήση του απαραίτητου για την σύνδεση με τη βάση δεδομένων και την εκτέλεση ερωτημάτων αρχείου κλάσης Db.class.php
+session_start(); //Start the session
+require 'database/Db.class.php'; //Call the necessary class file (Db.class.php) to connect to the database and run queries
 $db = new Db(); 
-function phpAlert($msg) { //Δημιουργία της μεθόδου phpAlert που εμφανίζει ένα javascript alert που περιέχει ένα μήνυμα και στη συνέχεια ανακατευθύνει
+function phpAlert($msg) { //Create the phpAlert method that displays a javascript alert containing a message and then redirects
 	echo '<script type="text/javascript">alert("' . $msg . '");window.location = \'login.php\';</script>';
 }
 
@@ -22,7 +22,7 @@ if(isset($_SESSION['login'])){
 </head>
 
 <body class="login-form">
-	<section class="h-100"> <!-- Section που περιέχει τα login και registration forms καθώς και το brand image -->
+	<section class="h-100"> <!-- Section containing login and registration forms as well as the brand image -->
 		<div class="container h-100">
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper" style="margin-left:auto; margin-right:auto;">
@@ -31,8 +31,8 @@ if(isset($_SESSION['login'])){
 					</div>
 					<div class="button-box">
 						<div id="swapbtn"></div>
-						<button type="button" class="toggle-btn" onclick="login()">Log In</button> <!-- Κουμπί το οποίο κατά το "πάτημα" του καλεί τη javascript μέθοδο login() -->
-						<button type="button" class="toggle-btn" onclick="register()">Register</button> <!-- Κουμπί το οποίο κατά το "πάτημα" του καλεί τη javascript μέθοδο register() -->
+						<button type="button" class="toggle-btn" onclick="login()">Log In</button> <!-- Button which when "pressed" calls the javascript method login() -->
+						<button type="button" class="toggle-btn" onclick="register()">Register</button> <!-- Button which when "pressed" calls the javascript method register() -->
 					</div>
 					<br>	
 					<div id="fbody" class="form-box">
@@ -103,40 +103,40 @@ if(isset($_SESSION['login'])){
 				</div>
 			</div>
 		</div>
-	</section> <!-- Τέλος login & register section -->
+	</section> <!-- End of login & register sections -->
 	<?php
-	if(isset($_POST['loginbtn'])) //Έλεγχος αν έχει γίνει υποβολή των στοιχείων στo login form
+	if(isset($_POST['loginbtn'])) //Check if the data have been submitted to the login form
 	{
 		$user = $_POST['username'];
 		$pass = $_POST['password'];
-		$username = $db->escape_string($user); //Αποθήκευση του αποτελέσματος της function escape_string της κλάσης Db στη μεταβλητή $pass
+		$username = $db->escape_string($user); //Save the result of function escape_string of the Db class in the $pass variable
 		$password = $db->escape_string($pass);
 
 		$userInfo = $db->get_user_info($username);
-		if(mysqli_num_rows($userInfo) > 0) //Έλεγχος αν τα δεδομένα που είναι αποθηκευμένα στη μεταβλητή $userInfo είναι περισσότερα του μηδενός
+		if(mysqli_num_rows($userInfo) > 0) //Check if the data stored in the $userInfo variable is more than zero
 		{
 			while($row=mysqli_fetch_array($userInfo))
 			{
-				if(password_verify($password, $row['pass']))//Αποκρυπτογράφηση και επαλήθευση του κωδικού χρήστη
+				if(password_verify($password, $row['pass']))//Decryption and verification of user code
 				{		
-					$_SESSION['login'] = $username;  //Αν είναι, γίνεται καταχώρηση του $username στη μεταβλητή $_SESSION['username']
-					if(isset($_SESSION['currenturl'])){ //Έλεγχος αν έχει δημιουργηθεί η μεταβλητή $_SESSION['currenturl'] (header.php)
+					$_SESSION['login'] = $username;  //If correct, the $username is entered in the variable $_SESSION['username']
+					if(isset($_SESSION['currenturl'])){ //Check if the variable $_SESSION['currenturl'] (header.php) has been created
 						echo "<script type='text/javascript'> document.location = '" . $_SESSION['currenturl'] ."'; </script>";
 					}else{
 						echo "<script type='text/javascript'> document.location = 'home.php'; </script>";
 					}
-				}else{ //Αν τα στοιχεία είναι λανθασμένα εμφανίζεται το κατάλληλο μήνυμα
+				}else{ //If the items are incorrect, the appropriate message is displayed
 					phpAlert("Invalid username or password");
 				}
 			}
-		}else{ //Αν ο αριθμός των εγγραφών δεν είναι μεγαλύτερος του μηδενός τότε εμφανίζεται το κατάλληλο μήνυμα
+		}else{ //if the number of records is not greater than zero the appropriate message is displayed
 			phpAlert("Invalid username or password");
 		}
 	}
 
 	
 
-	if(isset($_POST['registerbtn'])) //Έλεγχος αν έχει γίνει υποβολή των στοιχείων στo register form
+	if(isset($_POST['registerbtn'])) //Check if the data have been submitted to the register form
 	{
 		$firstname = $_POST['name'];
 		$lastname = $_POST['surname'];
@@ -150,28 +150,28 @@ if(isset($_SESSION['login'])){
 		$phone = $db->escape_string($phonenumber);
 		$email = $db->escape_string($Email);
 		$pass = $db->escape_string($passwrd);
-		$pass = $db->pass_hush($pass); //Αποθήκευση του αποτελέσματος της function pass_hust της κλάσης Db στη μεταβλητή $pass
+		$pass = $db->pass_hush($pass); //Save the result of function pass_hust of the  Db class in the $pass variable
 		
-		$exists = 0; //Χρήση βοηθητικής μεταβλητής ως flag
+		$exists = 0; //Use an auxiliary variable as a flag
 
 		
 		$usernameExists = $db->username_exists($username);
 		$emailExists = $db->email_exists($email);
 		
 		
-			if (($usernameExists['username'] === $username) || ($emailExists['email'] === $email)){ //Αν υπάρχει τέτοια εγγραφή εμφανίζεται το κατάλληλο μήνυμα
+			if (($usernameExists['username'] === $username) || ($emailExists['email'] === $email)){ //if such a record exists, the appropriate message is displayed
 			phpAlert("Username or email already exists");
-			$exists = 1; //Αλλάζει η τιμή του flag
+			$exists = 1; //The value of the flag changes
 			}
 		
-		if($exists== 0){ //Αν η τιμή του flag παραμένει ίδια, πραγματοποιείται εγγραφή του χρήστη στη βάση
+		if($exists== 0){ //if the flag value remains the same the user is registered in the database
 			$db->register_user("$fname", "$lname", "$username", "$phone", "$email", "$pass");
 			phpAlert("User created succesfully!");
 			}
 	}
-	$db->close(); //Τερματισμός της σύνδεσης με τη βάση δεδομένων
+	$db->close(); //End the connection to the database
 	?>
-	<script> //Javascript για τη σωστή λειτουργία των κουμπιών εναλλαγής μεταξύ login και register και αλλαγή στο style της φόρμας ανάλογα με την επιλογή
+	<script> //Javascript for the correct operation of the toggle buttons between login and register and change in the style of the form depending on the choice
 		var log = document.getElementById("login");
 		var reg = document.getElementById("register");
 		var btn = document.getElementById("swapbtn");
