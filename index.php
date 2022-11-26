@@ -1,5 +1,5 @@
 <?php 
-require 'database/Db.class.php'; //Κλήση του απαραίτητου για την σύνδεση με τη βάση δεδομένων και την εκτέλεση ερωτημάτων αρχείου κλάσης Db.class.php
+require 'database/Db.class.php'; //Call the necessary class file (Db.class.php) to connect to the database and run queries
 require 'includes/header.php'; //Κλήση του απαραίτητου για την εκτέλεση του παρακάτω κώδικα αρχείου, header.php 
 
 $db = new Db(); //Δημιουργία object της κλάσης Db
