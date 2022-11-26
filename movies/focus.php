@@ -1,19 +1,19 @@
 <?php
-require '../database/Db.class.php'; //Κλήση του απαραίτητου για την σύνδεση με τη βάση δεδομένων και την εκτέλεση ερωτημάτων αρχείου κλάσης Db.class.php
-require '../includes/movie-header.php'; //Κλήση του απαραίτητου για την εκτέλεση του παρακάτω κώδικα αρχείου, movie-header.php 
+require '../database/Db.class.php'; //Call the necessary class file (Db.class.php) to connect to the database and run queries
+require '../includes/movie-header.php'; //Call the file necessary to execute the following code, movie-header.php 
 
-$db = new Db(); //Δημιουργία object της κλάσης Db
+$db = new Db(); //Create a Db class object
 
-$row = $db->get_movie(3); //Αποθήκευση του αποτελέσματος της function get_movie της κλάσης Db στη μεταβλητή $row
+$row = $db->get_movie(3); //Save the result of function get_movie of the DB class to the variable $row
 
 
-function phpAlert($msg) { //Δημιουργία της μεθόδου phpAlert που εμφανίζει ένα javascript alert που περιέχει ένα μήνυμα και στη συνέχεια ανακατευθύνει
+function phpAlert($msg) { //Create the phpAlert method that displays a javascript alert containing a message and then redirects
 echo '<script type="text/javascript">alert("' . $msg . '");window.location = "' . $_SESSION['currenturl'] .'";</script>';
 }
 ?>
 
-<div class="container"> <!-- Div για το περιεχόμενο της σελίδας -->
-  <div class="content-container"> <!-- Container div για τις πληροφορίες της ταινίας -->
+<div class="container"> <!-- Div for page content -->
+  <div class="content-container"> <!-- Container div for movie information -->
       <?php echo '<div class="movie-page-content" style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('.$row['movieCover'].') no-repeat center center fixed; background-size: cover;">';
         echo '<img class="movie-logo" src="'.$row['movieLogo'].'">'; ?>
         <p class="movie-desc" style="margin-top:-150px;"><?php echo $row['movieDesc'];?></p>
@@ -24,31 +24,31 @@ echo '<script type="text/javascript">alert("' . $msg . '");window.location = "' 
         <br><br>  
         <p class="movie-desc">Duration: <?php echo $row['movieDuration'];?> &nbsp;&nbsp; Release Date: <?php echo $row['movieRelDate'];?></p> 
               </div>
-</div> <!-- Κλείσιμο του container div-->
+</div> <!-- End of the container div-->
     <br>
-    <div class="trailer-container"> <!-- Div για το trailer της ταινίας -->
+    <div class="trailer-container"> <!-- Div for the movie trailer -->
         <?php echo $row['movieTrailer'];?>
-    </div> <!-- Κλείσιμο trailer div -->
+    </div> <!-- End of the trailer div -->
 
     <?php 
     $id = $row['movieID'];    
-    $bookingQuery = $db->get_max_booking_seats($id); //Αποθήκευση του αποτελέσματος της function get_max_booking_seats της κλάσης Db στη μεταβλητή $bookingQuery
+    $bookingQuery = $db->get_max_booking_seats($id); //Save the result of function get_max_booking_seats of the DB class to the variable $bookingQuery
     $maxsnum = "";
     $bkngnum = "";
     while($sts = mysqli_fetch_array($bookingQuery)) {
       $maxsnum = $sts['movieSeats'];
       $bkngnum = $sts['bookings'];
     }
-    $seats = $maxsnum - $bkngnum; //Υπολογισμός διαθέσιμων θέσεων
+    $seats = $maxsnum - $bkngnum; //Calculation of available seats
   ?>
 
-  <div class="form-container"> <!-- Container div της φόρμας κρατήσεων -->
+  <div class="form-container"> <!-- Container div of the booking form -->
     <div class="container-form">
-      <form action="" method="POST">  <!-- Δημιουργία της φόρμας -->
+      <form action="" method="POST">  <!-- Creation of the form -->
         <h2>Book your ticket for <?php echo $row['movieTitle'];?>!</h2>
         <?php 
-        if($seats != 0) { //Έλεγχος αν οι διαθέσιμες θέσεις δεν είναι 0, αν είναι, τότε δεν εμφανίζεται το περιεχόμενο της φόρμας
-          if(!isset($_SESSION['login'])){ //Έλεγχος αν δεν υπάρχει συνδεμένος χρήστης, αν υπάρχει, εμφανίζονται συγκεκριμένα πεδία
+        if($seats != 0) { //Check if the available positions are not 0 if they are then the form content is not displayed
+          if(!isset($_SESSION['login'])){ //Check if there is no logged-in user, if any, show specific fields
             echo '<div class="form-field">';
             echo '<p>Name</p>';
             echo '<input type="text" name="fname" placeholder="Your Name" title="Must contain only letters" pattern="[A-Za-zΑ-Ωα-ωίϊΐόάέύϋΰήώ]{2,}" required>';
@@ -121,8 +121,8 @@ echo '<script type="text/javascript">alert("' . $msg . '");window.location = "' 
         }
         ?>     
         <p id="seats"></p>      
-      </form> <!-- Κλείσιμο του div της φόρμας -->
-            <script> //Javascript κώδικας που εμφανίζει ένα κείμενο και τη τιμή της μεταβλητής $seats στο <p> tag με id="seats"         
+      </form> <!-- End of the form div -->
+            <script> //Javascript code that displays a text and the value of the variable $seats in the <p> tag with id="seats"      
               document.getElementById("seats").innerHTML = "<?php echo "Available seats: " . $seats?>";
             </script>
     </div>   
@@ -130,16 +130,16 @@ echo '<script type="text/javascript">alert("' . $msg . '");window.location = "' 
   </div>    
 
   <?php 
-  if(isset($_SESSION['login'])){ //Έλεγχος αν υπάρχει συνδεμένος χρήστης
+  if(isset($_SESSION['login'])){ //Check if there is a logged-in user
    
-    $username = $_SESSION['login']; //Αποθήκευση του username του συνδεμένου χρήστη στη μεταβλητή $username
-    $row2 = $db->get_username($username); //Αποθήκευση του αποτελέσματος του function get_username της κλάσης Db στη μεταβλητή $row2
+    $username = $_SESSION['login']; //Save the logged-in username to the variable $username
+    $row2 = $db->get_username($username); //Save the result of function get_username of the DB class in the $row2 variable
 
-    $fname = $row2['firstName'];  //Αποθήκευση πληροφοριών απο τη βάση στις αντίστοιχες μεταβλητές
+    $fname = $row2['firstName'];  //Store information from the database up in the corresponding variables
     $lname = $row2['lastName'];
     $email = $row2['email'];
     $phone = $row2['phoneNumber'];
-  } else {                      //Αν δεν υπάρχει συνδεμένος χρήστης τότε στις μεταβλητές αποθηκεύονται τα περιεχόμενα των πεδίων της φόρμας κρατήσεων
+  } else {                      //if there is no logged-in user then the variables store the contents of the booking form fields
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
     $email = $_POST["email"];
@@ -153,11 +153,11 @@ echo '<script type="text/javascript">alert("' . $msg . '");window.location = "' 
   $col = $_POST["colNumber"];
  
 
-  if(isset($_POST['submit']))  //Έλεγχος αν έχει "πατηθεί" από τον χρήστη το κουμπί submit και εκτέλεση της function create_booking της κλάσης Db στη βάση δεδομένων
+  if(isset($_POST['submit']))  //Check if the submit button has been pressed by the user and run the function create_booking of the DB class in the database
   {
     $db->create_booking("$movieID", "$fname", "$lname", "$email", "$phone", "$date", "$hour", "$row", "$col", "$username");
-    phpAlert("Your booking for the movie " . $movieTitle . " was successful!"); //Μήνυμα επιτυχούς εισαγωγής                    
+    phpAlert("Your booking for the movie " . $movieTitle . " was successful!"); //Successful booking message                                    
   }
-echo '</div>'; //Κλείσιμο του div για το περιεχόμενο της σελίδας
-require '../includes/movie-footer.php'; //Κλήση του απαραίτητου για την εκτέλεση του παραπάνω κώδικα αρχείου, movie-footer.php 
+echo '</div>'; //End of the div for page content
+require '../includes/movie-footer.php'; //Call the file necessary to execute the above code, movie-footer.php 
 ?>
