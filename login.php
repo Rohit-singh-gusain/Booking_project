@@ -8,7 +8,7 @@ function phpAlert($msg) { //Create the phpAlert method that displays a javascrip
 	echo '<script type="text/javascript">alert("' . $msg . '");window.location = \'login.php\';</script>';
 }
 
-if(isset($_SESSION['login'])){
+if(isset($_SESSION['login'])){  //If a user login has occurred then redirect to index.php
 	header("Location: index.php");
 }
 
