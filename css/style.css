@@ -88,7 +88,7 @@ nav {
   outline: none;
 }
 
-/* Div περιεχομένων σελίδας */
+/* Page Contents Div */
 .wrapper-parallax {  
   margin-bottom: 180px;
 }
@@ -106,7 +106,7 @@ nav {
   height: auto;
 }
 
-/* Div που περιέχει τα trending movies και το slider */
+/* Div containing trending movies and slider */
 .left-box {
     margin-top: 20px;
 }
@@ -130,7 +130,7 @@ nav {
     margin: 15% 0;
     color:#fff;
 }
-/* Trending movie Εικόνα */
+/* Trending movie Picture */
 .movie-img {
   margin-top: 15px;
   height: 450px;
@@ -146,7 +146,7 @@ nav {
   margin: auto;
   margin-top: 20px;
 }
-/* Bullets αλλαγής slide */
+/* Bullets to change slide */
 .dot {
   cursor: pointer;
   height: 15px;
@@ -161,7 +161,7 @@ nav {
   background-color: #717171;
 }
 
-/* Τα rows με τις ταινίες στο κάτω μέρος του home.php */
+/* The rows with the strips at the bottom of the house.php */
 .movies h1 {
     color:#fff;
 }
@@ -177,7 +177,7 @@ nav {
     transform: translateY(-10px);
 }
 
- /* Div με το περιεχόμενο της σελίδας της ταινίας */
+ /* Div with the content of the movie page */
 .content-container { 
   margin-top:-160px;
 }
@@ -198,7 +198,7 @@ nav {
   width:100%;
   position:absolute;
 }
-/* Το logo της ταινίας */
+/* The logo of the movie */
 .movie-logo {
   margin-top: 150px;
   margin-left:50px;
@@ -207,13 +207,13 @@ nav {
   min-width: 387px;
   max-width: 560px;
 }
-/* Η περιγραφή της ταινίας */
+/* The description of the movie */
 .movie-desc {  
   width:500px;
   margin-top: -50px;
   margin-left:200px;
 }
-/* Div του trailer της ταινίας */
+/* Div of the movie trailer */
 .trailer-container {
   box-shadow: -4px 4px 50px 0 #000;
   height: 630px;
@@ -234,7 +234,7 @@ nav {
   height: 100%;
 }
 
-/* Div της φόρμας κρατήσων */
+/* Div of booking form */
 .form-container {
   background-color: #fafafacd;
   margin-top: 200px;
@@ -253,7 +253,7 @@ nav {
 .content-time {
   z-index: -1;
 }
-/*  Φόρμα κρατήσεων */
+/* Booking form */
 form {
   display: grid;
   grid-row-gap: 20px;
@@ -298,7 +298,7 @@ input,select {
   -o-transform: scale(1.03);
   box-shadow: 10px 12px 15px rgba(0, 0, 0, .3);
 }
-/* Εικόνα με τις θέσεις */
+/* Picture with the seats */
 .container-form #seats {
   margin:auto;
 }
@@ -326,7 +326,7 @@ input,select {
 .about a:hover {
   color: #e30c0c;
 }
-/* Div του χάρτη */
+/* Div for the map */
 .map {
   position: relative;
   overflow: hidden;
@@ -360,7 +360,7 @@ footer {
   cursor:pointer;  
 }
 
-/* CSS για responsiveness */
+/* CSS for responsiveness */
 @media screen and (max-width: 1120px) {
   .nav-ul {
     display: none;
