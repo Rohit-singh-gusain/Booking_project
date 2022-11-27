@@ -11,13 +11,13 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Βάση δεδομένων: `phpflix_db`
+-- Database: 'phpflix_db'
 --
 
 -- --------------------------------------------------------
 
 --
--- Δομή πίνακα για τον πίνακα `t_admins`
+-- Table structure for table 't_admins'
 --
 
 CREATE TABLE `t_admins` (
@@ -27,7 +27,7 @@ CREATE TABLE `t_admins` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Άδειασμα δεδομένων του πίνακα `t_admins`
+-- Insert data in the 't_admins' table
 --
 
 INSERT INTO `t_admins` (`adminID`, `adminUsername`, `adminPassword`) VALUES
@@ -36,7 +36,7 @@ INSERT INTO `t_admins` (`adminID`, `adminUsername`, `adminPassword`) VALUES
 -- --------------------------------------------------------
 
 --
--- Δομή πίνακα για τον πίνακα `t_booking`
+-- Table structure for table 't_booking`
 --
 
 CREATE TABLE `t_booking` (
@@ -55,7 +55,7 @@ CREATE TABLE `t_booking` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Άδειασμα δεδομένων του πίνακα `t_booking`
+-- Insert data in the `t_booking` table
 --
 
 INSERT INTO `t_booking` (`bookingID`, `movieID`, `firstName`, `lastName`, `email`, `phoneNumber`, `bookDate`, `bookTime`, `rowLetter`, `colNumber`, `username`, `bookTimestamp`) VALUES
@@ -66,7 +66,7 @@ INSERT INTO `t_booking` (`bookingID`, `movieID`, `firstName`, `lastName`, `email
 -- --------------------------------------------------------
 
 --
--- Δομή πίνακα για τον πίνακα `t_movies`
+-- Table structure for the table `t_movies`
 --
 
 CREATE TABLE `t_movies` (
@@ -85,7 +85,7 @@ CREATE TABLE `t_movies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Άδειασμα δεδομένων του πίνακα `t_movies`
+-- Insert data in the `t_movies` table
 --
 
 INSERT INTO `t_movies` (`movieID`, `movieTitle`, `movieLogo`, `movieDesc`, `movieGenre`, `movieCast`, `movieDuration`, `movieRelDate`, `movieCover`, `movieTrailer`, `movieSeats`, `movieLink`) VALUES
@@ -105,7 +105,7 @@ INSERT INTO `t_movies` (`movieID`, `movieTitle`, `movieLogo`, `movieDesc`, `movi
 -- --------------------------------------------------------
 
 --
--- Δομή πίνακα για τον πίνακα `t_users`
+-- Table structure for the table `t_users`
 --
 
 CREATE TABLE `t_users` (
@@ -119,7 +119,7 @@ CREATE TABLE `t_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Άδειασμα δεδομένων του πίνακα `t_users`
+-- Insert data in the `t_users` table
 --
 
 INSERT INTO `t_users` (`userID`, `firstName`, `lastName`, `username`, `phoneNumber`, `email`, `pass`) VALUES
@@ -130,64 +130,64 @@ INSERT INTO `t_users` (`userID`, `firstName`, `lastName`, `username`, `phoneNumb
 --
 
 --
--- Ευρετήρια για πίνακα `t_admins`
+-- Indexes for table 't_admins'
 --
 ALTER TABLE `t_admins`
   ADD PRIMARY KEY (`adminID`);
 
 --
--- Ευρετήρια για πίνακα `t_booking`
+-- Indexes for table `t_booking`
 --
 ALTER TABLE `t_booking`
   ADD PRIMARY KEY (`bookingID`),
   ADD KEY `FK_movieID` (`movieID`);
 
 --
--- Ευρετήρια για πίνακα `t_movies`
+-- Indexes for table `t_movies`
 --
 ALTER TABLE `t_movies`
   ADD PRIMARY KEY (`movieID`);
 
 --
--- Ευρετήρια για πίνακα `t_users`
+-- Indexes for table `t_users`
 --
 ALTER TABLE `t_users`
   ADD PRIMARY KEY (`userID`);
 
 --
--- AUTO_INCREMENT για άχρηστους πίνακες
+-- AUTO_INCREMENT for unused tables
 --
 
 --
--- AUTO_INCREMENT για πίνακα `t_admins`
+-- AUTO_INCREMENT for table `t_admins`
 --
 ALTER TABLE `t_admins`
   MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT για πίνακα `t_booking`
+-- AUTO_INCREMENT for table `t_booking`
 --
 ALTER TABLE `t_booking`
   MODIFY `bookingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
--- AUTO_INCREMENT για πίνακα `t_movies`
+-- AUTO_INCREMENT for table `t_movies`
 --
 ALTER TABLE `t_movies`
   MODIFY `movieID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT για πίνακα `t_users`
+-- AUTO_INCREMENT for table `t_users`
 --
 ALTER TABLE `t_users`
   MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Περιορισμοί για άχρηστους πίνακες
+-- Limitations for unused tables
 --
 
 --
--- Περιορισμοί για πίνακα `t_booking`
+-- Constraints for table 't_booking'
 --
 ALTER TABLE `t_booking`
   ADD CONSTRAINT `FK_movieID` FOREIGN KEY (`movieID`) REFERENCES `t_movies` (`movieID`) ON DELETE CASCADE ON UPDATE CASCADE;
