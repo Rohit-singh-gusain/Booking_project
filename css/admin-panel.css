@@ -7,7 +7,7 @@
     text-decoration: none;
     color: unset;
 }
-/* Div του header */
+/* Div of the header */
 .admin-section-header {
     color: #FFF;
     width: 100%;
@@ -17,7 +17,7 @@
     box-shadow: 4px 2px 4px 4px #8c8c8c;
 }
 
-/* Logo στο admin dashboard */
+/* Logo on the admin dashboard */
 .admin-logo {
     padding: 15px 0;
     justify-content: center;
@@ -27,7 +27,7 @@
     width: 250px;    
 }
 
-/* Div που περιέχει το όνομα του συνδεμένου χρήστη και το icon */
+/* Div containing the logged-in user's name and icon */
 .admin-login-info {
     margin-right: 30px;
     display: flex;
@@ -39,7 +39,7 @@
     cursor: pointer;
 }
 
-/* Sidebar του admin-header.php */
+/* Sidebar of the admin-header.php */
 .admin-section1 {
     background-color: #373077;
     height: 100vh;
@@ -63,7 +63,7 @@
     margin-right: 20px;
 }
 
-/* Sidebar του admin-movies-header.php */
+/* Sidebar of the admin-movies-header.php */
 .admin-section3 {
     background-color: #373077;
     height: 100%;
@@ -95,7 +95,7 @@
     margin-right: 20px;
 }
 
-/* Div για τα περιεχόμενα των σελίδων */
+/* Div for page contents */
 .admin-container {
     display: grid;
     grid-template-columns: 1fr 5fr;
@@ -112,7 +112,7 @@
     padding: 0 10px;
 }
 
-/*  Div των στατιστικών στο admin dashboard */
+/*  Div of statistics in the admin dashboard */
 .admin-section-panel {
     width: 100%;
     vertical-align: middle;
@@ -148,7 +148,7 @@
     margin-bottom: 10px;
 }
 
-/* Div Booking και Add Movie του admin dashboard */
+/* Div of Booking and Add Movie in the admin dashboard */
 .admin-panel-section-header {
     display: flex;
     align-items: center;
@@ -160,7 +160,7 @@
     color: #6e6e6e;
 }
 
-/* Div που περιέχει τα bookings */
+/* Div containing the bookings */
 .admin-panel-section-booking-item {
     background-color: none;
     -webkit-border-radius: 6px;
@@ -205,7 +205,7 @@
     cursor: pointer;
 }
 
-/* Delete icon στα movies και τα bookings */
+/* Delete icon in movies and bookings */
 .admin-panel-section-booking-response .delete-icon {
     background-color: #ab1111;
     height: 115px;
@@ -215,7 +215,7 @@
     background-color: #ce0b0b;
 }
 
-/* Edit icon στα movies */
+/* Edit icon in movies */
 .admin-panel-section-booking-response .edit-icon {
     transition: all 0.7s ease;
     background-color: #432e8d;
@@ -224,13 +224,13 @@
     background-color: #612dca;
 }
 
-/* Μήνυμα όταν δεν υπάρχουν εγγραφές */
+/* Message when there are no records */
 .no-annot {
     text-align: center;
     padding: 10px 0;
 }
 
-/* View all bookings button στο admin panel */
+/* View all bookings button in the admin panel */
 .view-all-btn {
     border-radius: 4px;
     border: none;
@@ -247,7 +247,7 @@
     background-color: #373077;
 }
 
-/* Div για τις φόρμες προσθήκης ταινίας και δημιουργίας κράτησης */
+/* Div for the movie-adding and booking creation forms */
 .admin-section-panel2 form {
     display: flex;
     justify-content: space-evenly;
@@ -283,7 +283,7 @@
     background-color: #373077;
 }
 
-/* Div για την μεταφόρτωση των εικόνων στο add movie */
+/* Div for uploading the images to add movie */
 .upload-file {
     margin-left: auto;
     margin-right: auto;
@@ -292,14 +292,14 @@
     justify-content:center;
     margin-bottom: 10px;
 }
-/* Button για την μεταφόρτωση των εικόνων στο add movie */
+/* Button for uploading images to add movie */
 #moviebtn {
     padding-right: 100px;
     border: 0;
     margin-top: 20px;
 }
 
-/* CSS για responsiveness */
+/* CSS for responsiveness */
 @media all and (max-width:30em) {
     a.movie-book-btn {
         display: block;
@@ -307,7 +307,7 @@
     }
 }
 
-/* Κλάσεις για τη λειτουργία της Javascript */
+/* Classes for Javascript functionality */
 .hidden-div {
     display: none;
     transition: all 0.7s ease;
