@@ -1,30 +1,30 @@
 <?php
-require '../database/Db.class.php'; //Κλήση του απαραίτητου για την σύνδεση με τη βάση δεδομένων και την εκτέλεση ερωτημάτων αρχείου κλάσης Db.class.php
-require 'admin-header.php'; //Κλήση του απαραίτητου για την εκτέλεση του παρακάτω κώδικα αρχείου, admin-header.php 
+require '../database/Db.class.php'; //Call the necessary class file (Db.class.php) to connect to the database and run queries
+require 'admin-header.php'; //Call the file necessary to execute the following code, admin-header.php 
 
-$db = new Db(); //Δημιουργία object της κλάσης Db
+$db = new Db(); //Create a Db class object
 
-function phpAlert($msg) { //Δημιουργία της μεθόδου phpAlert που εμφανίζει ένα javascript alert που περιέχει ένα μήνυμα και στη συνέχεια ανακατευθύνει
+function phpAlert($msg) { //Create the phpAlert method that displays a javascript alert containing a message and then redirects
   echo '<script type="text/javascript">alert("' . $msg . '");window.location = \'../admin/movies.php\';</script>';
 }
 
-$target1_dir = "../images/movie-logos/"; //Ανάθεση του επιθυμητού path σε μεταβλητή
+$target1_dir = "../images/movie-logos/"; //Assign the desired path to a variable
 $target2_dir = "../images/movies/";
-$file1_name = basename($_FILES["movieLogo"]["name"]); //Ανάθεση του ονόματος του αρχείου σε μεταβλητή
+$file1_name = basename($_FILES["movieLogo"]["name"]); //Assign the file name to a variable
 $file2_name = basename($_FILES["movieCover"]["name"]);
-$target_file1 = $target1_dir . basename($_FILES["movieLogo"]["name"]); //Ολοκληρωμένο επιθυμητό path του αρχείου 
+$target_file1 = $target1_dir . basename($_FILES["movieLogo"]["name"]); //Complete desired path of the file
 $target_file2 = $target2_dir . basename($_FILES["movieCover"]["name"]);
-$uploadOk = 1; //Βοηθητική μεταβλητή που λειτουργεί ως flag
-$imageFile1Type = pathinfo($target_file1,PATHINFO_EXTENSION); //Ανάθεση των πληροφοριών του αρχείου σε μεταβλητή
+$uploadOk = 1; //Auxiliary variable that acts as a flag
+$imageFile1Type = pathinfo($target_file1,PATHINFO_EXTENSION); //Assign the file information to a variable
 $imageFile2Type = pathinfo($target_file2,PATHINFO_EXTENSION);
 $path1="../images/movie-logos/".$file2_name."";
 $path2="../images/movies/".$file1_name."";
 
-$id = $_REQUEST['id']; //Εισαγωγή στη μεταβλητή $id τα περιεχόμενα του "id" που αποστέλλεται μέσω της μεθόδου "GET" στο url
+$id = $_REQUEST['id']; //Assign to the variable $id the contents of the "id" sent through the "GET" method to the url
 
-$row = $db->get_movie($id); //Αποθήκευση του αποτελέσματος της function get_movie της κλάσης Db στη μεταβλητή $row
+$row = $db->get_movie($id); //Save the result of function get_movie of the DB class to the variable $row
 
-//Ανάθεση του αποτελέσματος του query στις παρακάτω μεταβλητές
+//Assign the query result to the following variables
 $title = $row['movieTitle']; 
 $genre = $row['movieGenre'];					
 $duration = $row['movieDuration'];
@@ -36,9 +36,9 @@ $seats = $row['movieSeats'];
 $link = $row['movieLink'];
 
 
-if(isset($_POST["submit"])) { //Έλεγχος αν έχει γίνει υποβολή των στοιχείων στη φόρμα επεξεργασίας ταινίας
+if(isset($_POST["submit"])) { //Check if the items in the movie edit form have been submitted
  
-  //Ανάθεση των τιμών των πεδίων της φόρμας στις παρακάτω μεταβλητές
+  //assign the values of the form fields to the following variables
   $title_new = $_POST["movieTitle"];
   $genre_new = $_POST["movieGenre"];
   $dur_new = $_POST["movieDuration"];
@@ -49,7 +49,7 @@ if(isset($_POST["submit"])) { //Έλεγχος αν έχει γίνει υποβ
   $seats_new = $_POST["movieSeats"];
   $moviepath = $_POST["movieLink"];
 
-  //Έλεγχος αν το αρχείο είναι εικόνα
+  //Check if the file is a picture
   $check1 = getimagesize($_FILES["movieLogo"]["tmp_name"]);
   $check2 = getimagesize($_FILES["movieCover"]["tmp_name"]);
   if(($check1 !== false) && ($check2 !==false)) {
@@ -59,19 +59,19 @@ if(isset($_POST["submit"])) { //Έλεγχος αν έχει γίνει υποβ
     $uploadOk = 0;
   }
 
-  //Έλεγχος αν η εικόνα υπάρχει ήδη
+  //Check if the image already exists
   if ((file_exists($target_file1)) || (file_exists($target_file2)))  {
     phpAlert("Sorry, image file already exists.");
     $uploadOk = 0;
   }
 
-  //Έλεγχος του μεγέθους του αρχείου
+  //Check the file size
   if (($_FILES["movieLogo"]["size"] > 500000) || ($_FILES["movieCover"]["size"] > 500000))  {
     phpAlert("Sorry, your file(s) is(are) too large.");
     $uploadOk = 0;
   }
 
-  //Έλεγχος υποστήριξης του τύπου του αρχείου
+  //Check support for the file type
   if(($imageFile1Type != "jpg" && $imageFile1Type != "png" && $image1FileType != "jpeg"
   && $imageFile1Type != "gif" ) || ($imageFile2Type != "jpg" && $imageFile2Type != "png" && $image2FileType != "jpeg"
   && $imageFile2Type != "gif" )) {
@@ -79,10 +79,10 @@ if(isset($_POST["submit"])) { //Έλεγχος αν έχει γίνει υποβ
     $uploadOk = 0;
   }
 
-  //Έλεγχος αν έχει υπάρξει αλλαγή στη τιμή της βοηθητικής μεταβλητής
+  //Check if there has been a change in the value of the auxiliary variable
   if ($uploadOk == 0) {
     phpAlert("Sorry, your image file(s) was(were) not uploaded.");
-  //Αν η τιμή έχει παραμείνει ίδια, γίνεται προσπάθεια μεταφόρτωσης της εικόνας
+  //If the value remains the same, an attempt is made to upload the image
   } else {
     if ((move_uploaded_file($_FILES["movieLogo"]["tmp_name"], $target_file1)) && (move_uploaded_file($_FILES["movieCover"]["tmp_name"], $target_file2))) {          
 
@@ -95,12 +95,12 @@ if(isset($_POST["submit"])) { //Έλεγχος αν έχει γίνει υποβ
   }
 }
 ?>
-<div class="admin-section-column" style="margin: 10px 10px;"> <!-- Div που περιέχει τη φόρμα επεξεργασίας ταινίας -->
+<div class="admin-section-column" style="margin: 10px 10px;"> <!-- Div containing the movie edit form -->
   <div class="admin-section-panel admin-section-panel2">
     <div class="admin-panel-section-header">
         <h2>Edit Movie: <?php echo $row['movieTitle'] ?></h2>
     </div>    
-    <form action method="POST" style="margin-top:15px;" enctype="multipart/form-data"> <!-- Φόρμα επεξεργασίας επιλεγμένης ταινίας -->
+    <form action method="POST" style="margin-top:15px;" enctype="multipart/form-data"> <!-- Selected movie edit form -->
     <input placeholder="Title" type="text" name="movieTitle" value="<?php echo $title ?>" required>
     <input placeholder="Description (max 500 chars)" type="text" value="<?php echo $desc ?>" name="movieDescription"  required>
     <input placeholder="Genre" type="text" name="movieGenre" value="<?php echo $genre ?>" required>
@@ -121,6 +121,7 @@ if(isset($_POST["submit"])) { //Έλεγχος αν έχει γίνει υποβ
     </form>
   </div>
 </div>
-<?php $db->close(); //Τερματισμός της σύνδεσης με τη βάση ?>
+<?php $db->close(); //End the connection to the database
+?>
 </body>
 </html>
