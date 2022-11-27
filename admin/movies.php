@@ -1,19 +1,19 @@
 <?php
-require '../database/Db.class.php'; //Κλήση του απαραίτητου για την σύνδεση με τη βάση δεδομένων και την εκτέλεση ερωτημάτων αρχείου κλάσης Db.class.php
-require '../includes/admin-movies-header.php'; //Κλήση του απαραίτητου για την εκτέλεση του παρακάτω κώδικα αρχείου, admin-movies-header.php
+require '../database/Db.class.php'; //Call the necessary class file (Db.class.php) to connect to the database and run queries
+require '../includes/admin-movies-header.php'; //Call the file necessary to execute the following code, admin-movies-header.php
 
-$db = new Db(); //Δημιουργία object της κλάσης Db
+$db = new Db(); //Create a Db class object
 
 $getAllMovies = $db->get_all_movies();
 
 ?>
-    <div class="admin-section-column"> <!-- Div για το περιεχόμενο της σελίδας -->
+    <div class="admin-section-column"> <!-- Div for page content -->
         <div class="admin-section admin-section2">
-            <div class="admin-section-panel admin-section-panel2"> <!-- Div για τη φόρμα προσθήκης ταινίας -->
+            <div class="admin-section-panel admin-section-panel2"> <!-- Div for the movie add form -->
                 <div class="admin-panel-section-header">
                     <h2>Add a Movie</h2>
                 </div>
-                <form action="../includes/add-movie.php" method="POST" enctype="multipart/form-data"> <!-- Φόρμα προσθήκης ταινίας -->
+                <form action="../includes/add-movie.php" method="POST" enctype="multipart/form-data"> <!-- Add a movie form -->
                     <input placeholder="Title" type="text" name="movieTitle" required>
                     <input placeholder="Description (max 500 chars)" type="text" name="movieDescription" required>
                     <input placeholder="Genre" type="text" name="movieGenre" required>
@@ -31,29 +31,29 @@ $getAllMovies = $db->get_all_movies();
                         <input type="file" name="movieCover" id="moviebtn">
                     </div>
                     <button type="submit" value="submit" name="submit" class="form-btn">Add Movie</button>  
-                </form> <!--  Τέλος φόρμας προσθήκης ταινίας -->
+                </form> <!--  End of the movie add form -->
             </div>
             
         
-            <div class="admin-section-panel admin-section-panel1"> <!-- Div για τις ταινίες -->
+            <div class="admin-section-panel admin-section-panel1"> <!-- Div for the movies -->
                         <div class="admin-panel-section-header">
                             <h2>Movies</h2>
                         </div>
                         <div class="admin-panel-section-content">
                             <?php
                                 if(mysqli_num_rows($getAllMovies) > 0){
-                                    while($row = mysqli_fetch_array($getAllMovies)){ //Ανάθεση των περιεχομένων της μεταβλητής $getAllMovies στη μεταβλητή $row και εμφάνιση των ζητούμενων αποτελεσμάτων όσο αυτή περιέχει τιμές
-                                        $id = $row['movieID']; //Για κάθε επανάληψη γίνεται ανάθεση του id της αντίστοιχης ταινίας στη μεταβλητή $id
+                                    while($row = mysqli_fetch_array($getAllMovies)){ //Assign the contents of the $getAllMovies variable to the $row variable and display the requested results as long as it contains values
+                                        $id = $row['movieID']; //Each iteration assigns the id of the corresponding movie to the variable $id
                                         
                                         $bookingQuery = $db->get_max_booking_seats($id); 
-                                        //Αρχικοποίηση των μεταβλητών για χρήση τους εκτός του while loop
+                                        //Initialization of variables for use outside the while loop
                                         $maxsnum = "";
                                         $bkngnum = "";
-                                        while($sts = mysqli_fetch_array($bookingQuery)) {  //Όσο υπάρχουν εγγραφές, αυτές εισάγονται στη μεταβλητή $row και στις μεταβλητές $maxsnum και $bkngnum
-                                            $maxsnum = $sts['movieSeats'];                                              //εισάγονται ο αριθμός των θέσεων και το σύνολο των κρατήσεων αντίστοιχα
+                                        while($sts = mysqli_fetch_array($bookingQuery)) {  //As long as there are records, they are entered into the $row variable and $maxsnum variables, and $bkngnum
+                                            $maxsnum = $sts['movieSeats'];                 //the number of seats and the total reservations respectively are entered
                                             $bkngnum = $sts['bookings'];
                                         }
-                                        $availseats = $maxsnum - $bkngnum;  //Υπολογισμός των διαθέσιμων θέσεων και στη συνέχεια δυναμική απεικόνιση των αποτελεσμάτων του query της 4ης γραμμής
+                                        $availseats = $maxsnum - $bkngnum;  //Calculate available seats and then dynamically display the results of the 4th line query
                                         echo "<div class=\"admin-panel-section-booking-item\">\n";
                                         echo "      <div class=\"admin-panel-section-booking-info\">\n";
                                         echo "            <div>\n";
@@ -87,14 +87,14 @@ $getAllMovies = $db->get_all_movies();
                                     echo '<h4 class="no-annot">No Movies right now</h4>';
                                 }
                            
-                            $db->close(); //Τερματισμός της σύνδεσης με τη βάση                    
+                            $db->close(); //End the connection to the database                    
                             ?>
                         </div>
             </div>
         </div>
     </div>
     <script>
-        $(function(){ //JQUERY που εμφανίζει μήνυμα επιβεβαίσης όταν ο χρήστης εκτελεί μία συσκεκριμένη ενέργεια (διαγραφή ταινίας)
+        $(function(){ //JQUERY showing confirmation message when user performs a confused action (delete movie)
             $('a#delete').click(function(){
                 if(confirm('Are you sure you want to delete this movie?')) {
                     return true;
