@@ -1,4 +1,4 @@
-/* Popup που εμφανίζεται όταν ο admin κάνει κλικ στο "Create a booking" του admin dashboard */
+/* Popup that appears when the admin clicks on the "Create a booking" of the admin dashboard */
 .popup-dialog {
   display: none; 
   position: fixed; 
@@ -19,7 +19,7 @@
   width: 80%; 
 }
 
-/* To select field της φόρμας κρατήσεων που περιέχει τις ταινίες */
+/* The select field of the booking form containing the movies */
 select { 
   width: 32%;
   padding: 12px 20px;
@@ -29,7 +29,7 @@ select {
   color: #6e6e6e;
 }
 
-/* Το animation της εμφάνισης του παραπάνω div */
+/* The animation of the appearance of the above div */
 .animate {
   -webkit-animation: animatezoom 0.6s;
   animation: animatezoom 0.6s
