@@ -1,14 +1,14 @@
 <?php
-session_start(); //Εκκίνηση του session
-require '../database/Db.class.php'; //Κλήση του απαραίτητου για την σύνδεση με τη βάση δεδομένων και την εκτέλεση ερωτημάτων αρχείου κλάσης Db.class.php
+session_start(); //Start the session
+require '../database/Db.class.php'; //Call the necessary class file (Db.class.php) to connect to the database and run queries
 
-$db = new Db(); //Δημιουργία object της κλάσης Db
+$db = new Db(); //Create a Db class object
 
-if (isset($_SESSION['loggedin'])) { //Αν έχει πραγματοποιηθεί σύνδεση χρήστη τότε πραγματοποιείται ανακατεύθυνση στο index.php
+if (isset($_SESSION['loggedin'])) { //If a user login has occurred then redirect to index.php
 	header('Location: index.php');
 }
 
-function phpAlert($msg) { //Δημιουργία της μεθόδου phpAlert που εμφανίζει ένα javascript alert που περιέχει ένα μήνυμα
+function phpAlert($msg) { //Create the phpAlert method that displays a javascript alert containing a message and then redirects
 	echo '<script type="text/javascript">alert("' . $msg . '");</script>';
 }
 ?>
@@ -24,7 +24,7 @@ function phpAlert($msg) { //Δημιουργία της μεθόδου phpAlert 
 </head>
 
 <body class="login-form">
-	<section class="h-100"> <!--  Section που περιέχει το login form καθώς και το brand image-->
+	<section class="h-100"> <!--  Section containing login and registration forms as well as the brand image-->
 		<div class="container h-100">
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper" style="margin-left:auto; margin-right:auto;">
@@ -58,28 +58,28 @@ function phpAlert($msg) { //Δημιουργία της μεθόδου phpAlert 
 				</div>
 			</div>
 		</div>
-	</section>
+	</section>  <!-- End of login section -->
 	<?php
-	if(isset($_POST['loginbtn'])) //Έλεγχος αν έχει γίνει υποβολή των στοιχείων στo login form
+	if(isset($_POST['loginbtn'])) //Check if the data have been submitted to the login form
 	{
 		$user = $_POST['username'];
 		$pass = $_POST['password'];
-		$username = $db->escape_string($user); //Αποθήκευση του αποτελέσματος της function escape_string της κλάσης Db στη μεταβλητή $pass
+		$username = $db->escape_string($user); //Save the result of function escape_string of the Db class in the $pass variable
 		$password = $db->escape_string($pass);
 
 		
-		$row = $db->admin_login($username,$password); //Καταχώρηση του αποτελέσματος στη μεταβλητή $row
-		$count = $row['User']; //Καταχώρηση του αριθμού των αποτελεσμάτων του sql query της function admin_login της κλάσης Db στη μεταβλητή $count
+		$row = $db->admin_login($username,$password); //Assign the result in the variable $row
+		$count = $row['User']; //Store the number of sql query results of function admin_login of the DB class in the $count variable
 
-		if($count > 0){ //Έλεγχος αν ο αριθμός των εγγραφών είναι μεγαλύτερος του μηδενός
-		$_SESSION['loggedin'] = TRUE; //Αν είναι, γίνεται καταχώρηση της τιμής "TRUE" στη μεταβλητή $_SESSION['loggedin']
-		$_SESSION['name'] = $_POST['username']; //και του $username στη μεταβλητή $_SESSION['name']
+		if($count > 0){ //Check if the number of records is greater than zero
+		$_SESSION['loggedin'] = TRUE; //If it is, the value "TRUE" is assigned in the variable $_SESSION['loggedin']
+		$_SESSION['name'] = $_POST['username']; //and the $username in the variable $_SESSION['name']
 			header('Location: index.php');
-		}else{ //Αν ο αριθμός των εγγραφών δεν είναι μεγαλύτερος του μηδενός τότε εμφανίζεται το κατάλληλο μήνυμα
+		}else{ //if the number of records is not greater than zero the appropriate message is displayed
 			phpAlert("Invalid username and password");
 		}
 	}
-$db->close(); //Τερματισμός της σύνδεσης με τη βάση	
+$db->close(); //End the connection to the database	
 ?>
 </body>
 </html>
