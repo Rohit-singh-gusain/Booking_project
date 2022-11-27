@@ -2,7 +2,7 @@
 session_start(); //Start the session
 require 'database/Db.class.php'; //Call the necessary class file (Db.class.php) to connect to the database and run queries
 
-$db = new Db(); //Δημιουργία object της κλάσης Db
+$db = new Db(); //Create a Db class object
 
 if(isset($_SESSION['login'])){  //If a user login has occurred then redirect to index.php
 	header("Location: index.php");
