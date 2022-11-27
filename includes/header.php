@@ -1,14 +1,14 @@
 <?php
-    session_start(); //Εκκίνηση του session
-    if(isset($_SESSION['login'])) //Αν έχει πραγματοποιηθεί σύνδεση χρήστη τότε το username του εισάγεται στη μεταβλητή $username
+    session_start(); //Start the session
+    if(isset($_SESSION['login'])) //If a user login has been made then his username is entered in the variable $username
     {
         $username = $_SESSION['login'];
     }
-    else //Αν δεν έχει πραγματοποιηθεί σύνδεση χρήστη τότε το username "guest" εισάγεται στη μεταβλητή $username
+    else //If no user login has been established then the username "guest" is entered in the variable $username
     {
         $username = "guest";
     }
-    $_SESSION['currenturl'] = $_SERVER['REQUEST_URI']; //Πραγματοποιείται αίτημα στον server για να επιστρέψει το link της σελίδας, το οποίο εισάγεται στη μεταβλητή $_SESSION['currenturl'];
+    $_SESSION['currenturl'] = $_SERVER['REQUEST_URI']; //A request is made to the server to return the page link, which is entered in the variable $_SESSION['currenturl'];
 ?>
 <!DOCTYPE html>
     <head>
@@ -27,30 +27,30 @@
     </head>
 <body>
 <div class="header" id="header">
-    <a class="logo" href="home.php"><img src="images/logo-small.png" alt="logo"></a> <!-- Εισαγωγή του logo -->
-    <nav> <!-- Δημιουργία του nav bar -->
+    <a class="logo" href="home.php"><img src="images/logo-small.png" alt="logo"></a> <!-- Logo -->
+    <nav> <!-- Create the nav bar -->
     <ul class="nav-ul" id="nav-ul"> 
         <?php if(isset($_SESSION['login'])){ echo  '<li style="color:#fff; font-family:\'Comfortaa\'; font-size:16px;">Welcome, ' . strtolower($_SESSION['login']) .'!</li>'; }?> <!-- Εμφάνιση μηνύματος ανάλογα με το username του εκάστοτε χρήστη -->
         <li><a href="index.php">Home</a></li>
         <li><a href="index.php#gotomovies">Movies</a></li>
-        <?php if(isset($_SESSION['login'])){ echo '<li><a href="booking-history.php">Booking History</a></li>'; }?> <!-- Έλεγχος αν υπάρχει συνδεμένος χρήστης και αν ναι τότε να εμφανίζει στο μενού την επιλογή "Booking History" -->
+        <?php if(isset($_SESSION['login'])){ echo '<li><a href="booking-history.php">Booking History</a></li>'; }?> <!-- Check if there is a logged-in user and if so then display in the menu the option "Booking History" -->
         <li><a href="about-us.php">About Us</a></li>
         <?php 
-        if(!isset($_SESSION['login'])){ //Έλεγχος αν υπάρχει συνδεμένος χρήστης και εμφάνιση κατάλληλης επιλογής στο μενού" 
+        if(!isset($_SESSION['login'])){ //Check if there is a logged-in user and display a suitable option in the menu 
             echo '<li><a class="cta" href="login.php">Account</a></li>';
         } else {
             echo '<li><a class="cta" id="logout" href="includes/logout.php">Logout</a></li>';
         }
         ?>
         </ul>
-        <button class="hamburger" id="hamburger"> <!-- Κουμπί μενού που εμφανίζεται υπό κατάλληλες προϋποθέσεις (μικρότερο breakpoint) -->
+        <button class="hamburger" id="hamburger"> <!-- Menu button displayed under appropriate conditions (smaller breakpoint) -->
             <i class="fas fa-bars"></i>
         </button>
     </nav>   
 </div>
 <script src="/phpflix/scripts/mobmenu.js"></script> <!-- Javascript για τη σωστή λειτουργία του παραπάνω κουμπιού μενού -->
 
-<script> //JQUERY που εμφανίζει μήνυμα επιβεβαίσης όταν ο χρήστης εκτελεί μία συσκεκριμένη ενέργεια (αποσύνδεση)
+<script> //JQUERY showing confirmation message when user performs a concreted action (logout)
     $(function(){
         $('a#logout').click(function(){
             if(confirm('Are you sure you want to logout?')) {
@@ -61,9 +61,6 @@
     });
 </script>
 
-<div class="wrapper-parallax"> <!-- Div που εξυπηρετεί στο parallax effect του περιεχομένου και του footer (κλείνει στο footer.php)-->
-    <div class="content">      <!-- Div που περιέχει όλο το περιεχόμενο της σελίδας (κλείνει στο footer.php) -->
-        
-        
-      
-        
+<div class="wrapper-parallax"> <!-- Div serving in the parallax effect of content and footer (closes in footer.php)-->
+    <div class="content">      <!-- Div containing all page content (closes in footer.php) -->
+                      
