@@ -48,7 +48,7 @@
         </button>
     </nav>   
 </div>
-<script src="/phpflix/scripts/mobmenu.js"></script> <!-- Javascript για τη σωστή λειτουργία του παραπάνω κουμπιού μενού -->
+<script src="/phpflix/scripts/mobmenu.js"></script> <!-- Javascript for the proper functioning of the above menu button -->
 
 <script> //JQUERY showing confirmation message when user performs a concreted action (logout)
     $(function(){
