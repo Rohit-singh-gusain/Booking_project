@@ -25,8 +25,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    </head>
 <body>
-<div class="wrapper-parallax"> <!-- Div serving in the parallax effect of content and footer (closes the footer.php) -->
-    <div class="content">      <!-- Div containing all page content (closes the movie-footer.php) -->
+<div class="wrapper-parallax"> <!-- Div serving in the parallax effect of content and footer (closes in footer.php) -->
+    <div class="content">      <!-- Div containing all page content (closes in movie-footer.php) -->
 <div class="header" id="header">
     <a class="logo" href="../home.php"><img src="../images/logo-small.png" alt="logo"></a> <!-- Logo -->
     <nav> <!-- Create the nav bar -->
