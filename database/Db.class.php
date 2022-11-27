@@ -31,7 +31,7 @@ class Db
         }
     }
 
-    //Function που εισάγει στη βάση τα στοιχεία μιας νέας κράτησης
+    //Function that inserts into the database the details of a new reservation
     function create_booking($movieID, $firstName, $lastName, $email, $phoneNumber, $bookDate, $bookTime, $rowLetter, $colNumber, $username)
     {
         mysqli_query($this->conn, "INSERT INTO 
@@ -59,7 +59,7 @@ class Db
 
     
 
-     //Function που επιστρέφει όλες τις πληροφορίες που σχετίζονται με το συγκεκριμένο id
+     //Function that returns all information related to that id
     function get_movie($movieID)
     {
         $result = mysqli_query($this->conn, "SELECT * FROM t_movies WHERE movieID  = '$movieID'");
@@ -72,8 +72,8 @@ class Db
 
 		return $row;
     }
-    //Function που επιστρέφει όλες τις εγγραφές από τον πίνακα t_movies των οποίων ο τίτλος ξεκινάει από το περιεχόμενο της μεταβλητής $movieTitle
-    //καθώς με τον τρόπο που εισήχθησαν οι τιμές στα options του booking.php αντιστοιχήθηκε σε αυτά μόνο η πρώτη λέξη του τίτλου των ταινιών)
+    //Function that returns all records from the table t_movies whose title starts from the content of the variable $movieTitle
+    //as the way prices were entered into the booking options.php only the first word of the movie title was assigned to them)
     function get_movie_byTitle($movieTitle)
     {
         $result = mysqli_query($this->conn, "SELECT * FROM t_movies WHERE movieTitle LIKE '$movieTitle%'");
@@ -87,13 +87,13 @@ class Db
 		return $row;
     }  
 
-    //Function που επιστρέφει όλες τις εγγραφές από τον πίνακα t_movies
+    //Function that returns all records from the t_movies table
     function get_all_movies()
     {
         return mysqli_query($this->conn, "SELECT * FROM t_movies");
     }
 
-     //Function που επιστρέφει όλες τις εγγραφές από τον πίνακα t_booking
+     //Function that returns the total number of records from the t_movies table
      function get_movies_num()
      {
          $sql = mysqli_query($this->conn, "SELECT * FROM t_movies");
@@ -106,7 +106,7 @@ class Db
          return mysqli_num_rows($sql);
      }
 
-    //Function που επιστρέφει όλες τις εγγραφές από τον πίνακα t_booking
+    //Function that returns the total number of records from the t_booking table
     function get_bookings_num()
     {
         $sql = mysqli_query($this->conn, "SELECT * FROM t_booking");
@@ -119,13 +119,13 @@ class Db
         return mysqli_num_rows($sql);
     }
 
-    //Function που επιστρέφει τον αριθμό των κρατήσεων και το μέγιστο αριθμό θέσεων για τη ταινία με το συγκεκριμένο id 
+    //Function that returns the number of bookings and the maximum number of seats for the movie with the specified id
     function get_max_booking_seats($movieID)
     {
         return mysqli_query($this->conn, "SELECT COUNT(t_booking.bookingID) AS bookings, t_movies.movieSeats FROM t_booking JOIN t_movies ON t_booking.movieID = t_movies.movieID WHERE t_booking.movieID = '$movieID'");
     }
 
-    //Function που επιστρέφει όλες τις πληροφορίες που σχετίζονται με το συγκεκριμένο username 
+    //Function that returns all information related to the specific username
     function get_username($username)
     {
         $result = mysqli_query($this->conn, "SELECT * FROM t_users WHERE username = '$username'");
@@ -138,19 +138,19 @@ class Db
 
 		return $row;
     }
-    //Function που επιστρέφει πληροφορίες για το movieCover και το movieLink που σχετίζονται τα id των ταινιών τα οποία είναι μονοί αριθμοί
+    //Function that returns information about movieCover and movieLink related to the ids of movies which are odd numbers
     function get_home_movies_col1()
     {
         return mysqli_query($this->conn, "SELECT movieCover, movieLink FROM t_movies WHERE movieID %2 != 0");       
     }
 
-    //Function που επιστρέφει πληροφορίες για το movieCover και το movieLink που σχετίζονται τα id των ταινιών τα οποία είναι ζυγοί αριθμοί
+    //Function that returns information about the movieCover and movieLink associated with the ids of movies which are even numbers
     function get_home_movies_col2()
     {
         return mysqli_query($this->conn, "SELECT movieCover, movieLink FROM t_movies WHERE movieID %2 = 0");      
     }
 
-    //Function που επιστρέφει όλες τις πληροφορίες απο το πίνακα t_booking και το movieTitle από τον πίνακα t_movies που αντιστοιχούν στο username του χρήστη που είναι συνδεμένος στο site
+    //Function that returns all the information from the table t_booking and the movieTitle from the table t_movies corresponding to the username of the user logged in to the site
     function get_user_bookings($username)
     {
         $result = mysqli_query($this->conn, "SELECT t_booking.* , t_movies.movieTitle FROM t_booking JOIN t_movies ON t_booking.movieID = t_movies.movieID WHERE username =  '$username'");
@@ -163,19 +163,19 @@ class Db
         return $result;
     }
 
-    //Function για τη χρήση mysqli_real_escape_string για ασφαλή εισαγωγή δεδομένων στη βάση
+    //Function to use mysqli_real_escape_string to securely enter data into the database
     function escape_string($string)
     {
         return mysqli_real_escape_string($this->conn, $string);
     }
 
-    //Function για τη κρυπτογράφηση του κωδικού που θέτει ο χρήστης
+    //Function to encrypt the password set by the user
     function pass_hush($pass)
     {
         return password_hash($pass, PASSWORD_DEFAULT);
     }
 
-    //Function που επιστρέφει τις εγγραφές της βάσης για το συγκεκριμένο username
+    //Function that returns the database records for that username
     function get_user_info($username)
     {
         $result = mysqli_query($this->conn, "SELECT * FROM t_users WHERE username='$username'");
@@ -188,7 +188,7 @@ class Db
         return $result;
     }   
 
-    //Function που επιστρέφει μία και μόνο εγγραφή η οποία περιέχει το συγκεκριμένο username
+    //Function that returns a single record containing that username
     function username_exists($username)
     {
         $result = mysqli_query($this->conn, "SELECT * FROM t_users WHERE username='$username' LIMIT 1");
@@ -202,7 +202,7 @@ class Db
 		return $row;
     }
 
-    //Function που επιστρέφει μία και μόνο εγγραφή η οποία περιέχει το συγκεκριμένο email
+    //Function that returns a single record containing that email
     function email_exists($email)
     {
         $result = mysqli_query($this->conn, "SELECT * FROM t_users WHERE username='$email' LIMIT 1");
@@ -216,7 +216,7 @@ class Db
 		return $row;
     }
 
-    //Function που πραγματοποιεί εγγραφή του χρήστη στη βάση
+    //Function that registers the user in the database
     function register_user($fname, $lname, $username, $phone, $email, $pass)
     {
         mysqli_query($this->conn, "INSERT INTO 
@@ -234,7 +234,7 @@ class Db
                                                     '$pass')");
     }
 
-    //Function για προσθήκη ταινίας στη βάση δεδομένων
+    //Function for adding a movie to the database
     function add_movie($movieCover, $movieLogo, $movieTitle, $movieGenre, $movieDuration, $movieRelDate, $movieDesc, $movieCast, $movieTrailer, $movieSeats, $movieLink)
     {
         mysqli_query($this->conn, "INSERT INTO 
@@ -262,7 +262,7 @@ class Db
                                                 '$moviepath')");
     }
 
-    //Function για επεξεργασία ταινίας
+    //Function for movie editing
     function update_movie($movieCover, $movieLogo, $movieTitle, $movieGenre, $movieDuration, $movieRelDate, $movieDesc, $movieCast, $movieTrailer, $movieSeats, $movieLink, $movieID)
     {
         mysqli_query($this->conn, "UPDATE `t_movies` SET  movieCover = '$movieCover',
@@ -282,7 +282,7 @@ class Db
                                           return TRUE;
     }
 
-    //Function που διαγράφει από τον επιλεγμένο πίνακα το στοιχείο με id ίσο με τη μεταβλητή $id
+    //Function that deletes from the t_booking table the item with an id equal to the variable $id
     function delete_booking($id)
 	{
 		mysqli_query($this->conn, "DELETE FROM t_booking WHERE bookingID = '$id'")
@@ -291,7 +291,7 @@ class Db
 		return TRUE;
 	}
 
-    //Function που διαγράφει από τον επιλεγμένο πίνακα το στοιχείο με id ίσο με τη μεταβλητή $id
+    //Function that deletes from the t_movies table the item with an id equal to the variable $id
     function delete_movie($id)
     {
         mysqli_query($this->conn, "DELETE FROM t_movies WHERE movieID = '$id'")
@@ -300,19 +300,19 @@ class Db
         return TRUE;
     }
 
-    //Function που επιστρέφει όλες τις εγγραφές από τον πίνακα t_booking και το movieTitle από τον πίνακα t_movies σε φθίνουσα σειρά ως προς το πεδίο bookTimestamp
+    //Function that returns all records from table t_booking and movieTitle from table t_movies in descending order relative to the bookTimestamp field
     function get_all_bookings_and_title()
     {
         return mysqli_query($this->conn, "SELECT t_booking.*, t_movies.movieTitle FROM t_booking JOIN t_movies ON t_booking.movieID = t_movies.movieID ORDER BY bookTimestamp DESC");
     }
 
-    //Function που επιστρέφει τρεις εγγραφές από τον πίνακα t_booking και το movieTitle από τον πίνακα t_movies σε φθίνουσα σειρά ως προς το πεδίο bookTimestamp
+    //Function that returns three records from the t_booking table and the movieTitle from the t_movies table in descending order relative to the bookTimestamp field
     function get_three_bookings_and_title()
     {
         return mysqli_query($this->conn, "SELECT t_booking.*, t_movies.movieTitle FROM t_booking JOIN t_movies ON t_booking.movieID = t_movies.movieID ORDER BY bookTimestamp DESC LIMIT 3");
     }
 
-    //Function που επιστρέφει τον αριθμό των εγγραφών στη βάση με τα συγκεκριμένα username και password(κρυπτογραφημένο)
+    //Function that returns the number of records in the database with the specified username and password(encrypted)
     function admin_login($username, $password)
     {
         $result = mysqli_query($this->conn, "SELECT count(*) AS User FROM t_admins WHERE adminUsername='$username' and adminPassword='".md5($password)."'");
@@ -325,7 +325,8 @@ class Db
 
 		return $row;
     }
-
+    
+    //Function to terminate the connection to the database	
     function close()
 	{
 		mysqli_close($this->conn);
