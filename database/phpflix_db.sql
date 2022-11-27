@@ -2,10 +2,10 @@
 -- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Φιλοξενητής: localhost:3306
--- Χρόνος δημιουργίας: 28 Μάη 2021 στις 14:22:24
--- Έκδοση διακομιστή: 5.7.32
--- Έκδοση PHP: 7.4.12
+-- Host: localhost:3306
+-- Creation time: 28 May 2021 at 14:22:24
+-- Server version: 5.7.32
+-- PHP version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
