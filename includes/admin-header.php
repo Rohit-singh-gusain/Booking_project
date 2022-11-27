@@ -1,7 +1,7 @@
 <?php
-    session_start(); //Εκκίνηση του session
+    session_start(); //Start the session
 
-    if (!isset($_SESSION['loggedin'])) { //Αν δεν έχει πραγματοποιηθεί σύνδεση χρήστη τότε πραγματοποιείται ανακατεύθυνση στο login.php
+    if (!isset($_SESSION['loggedin'])) { //If no user login has been made then redirect to login.php
         header('Location: login.php');
     }
 ?>
@@ -19,7 +19,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
 <body>
-<div class="admin-section-header"> <!-- Div για τo header -->
+<div class="admin-section-header"> <!-- Header -->
         <div class="admin-logo">
             <img src="../images/logo.png" class="logo">
         </div>
@@ -29,7 +29,7 @@
             
         </div>
 </div>
-<div class="admin-container"> <!-- Div για τα περιεχόμενα της σελίδας (κλείνει στο τέλους του index.php) -->
+<div class="admin-container"> <!-- Div for page contents (closes at the end of index.php) -->
     <div class="admin-section admin-section1"> <!-- Div για το side menu -->
         <ul>
             <a href="index.php"><li><i class="fas fa-sliders-h"></i>Dashboard </li></a>
@@ -38,7 +38,7 @@
             <a href="logout.php" id="logout"><li><i class="fas fa-sign-out-alt"></i>Logout</li></a>
         </ul>
         <script>
-        $(function(){ //JQUERY που εμφανίζει μήνυμα επιβεβαίσης όταν ο χρήστης εκτελεί μία συσκεκριμένη ενέργεια (αποσύνδεση)
+        $(function(){ //JQUERY showing confirmation message when user performs a concreted action (logout)
             $('a#logout').click(function(){  
                 if(confirm('Are you sure you want to logout?')) {
                     return true;
