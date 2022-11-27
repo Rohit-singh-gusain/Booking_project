@@ -1,23 +1,23 @@
 <?php
-require '../database/Db.class.php'; //Κλήση του απαραίτητου για την σύνδεση με τη βάση δεδομένων και την εκτέλεση ερωτημάτων αρχείου κλάσης Db.class.php
+require '../database/Db.class.php'; //Call the necessary class file (Db.class.php) to connect to the database and run queries
 
-$db = new Db(); //Δημιουργία object της κλάσης Db
+$db = new Db(); //Create a Db class object
 
-function phpAlert($msg) { //Δημιουργία της μεθόδου phpAlert που εμφανίζει ένα javascript alert που περιέχει ένα μήνυμα και στη συνέχεια ανακατευθύνει
+function phpAlert($msg) { //Create the phpAlert method that displays a javascript alert containing a message and then redirects
   echo '<script type="text/javascript">alert("' . $msg . '");window.location = \'../admin/movies.php\';</script>';
 }
 
-$target1_dir = "../images/movie-logos/"; //Ανάθεση του επιθυμητού path σε μεταβλητή
+$target1_dir = "../images/movie-logos/"; //Assign the desired path to a variable
 $target2_dir = "../images/movies/";
-$file1_name = basename($_FILES["movieLogo"]["name"]); //Ανάθεση του ονόματος του αρχείου σε μεταβλητή
+$file1_name = basename($_FILES["movieLogo"]["name"]); //Assign the file name to a variable
 $file2_name = basename($_FILES["movieCover"]["name"]);
-$target_file1 = $target1_dir . basename($_FILES["movieLogo"]["name"]); //Ολοκληρωμένο επιθυμητό path του αρχείου 
+$target_file1 = $target1_dir . basename($_FILES["movieLogo"]["name"]); //Complete desired path of the file
 $target_file2 = $target2_dir . basename($_FILES["movieCover"]["name"]);
-$uploadOk = 1; //Βοηθητική μεταβλητή που λειτουργεί ως flag
-$imageFile1Type = pathinfo($target_file1,PATHINFO_EXTENSION); //Ανάθεση των πληροφοριών του αρχείου σε μεταβλητή
+$uploadOk = 1; //Auxiliary variable that acts as a flag
+$imageFile1Type = pathinfo($target_file1,PATHINFO_EXTENSION); //Assign the file information to a variable
 $imageFile2Type = pathinfo($target_file2,PATHINFO_EXTENSION);
 
-//Έλεγχος αν το αρχείο είναι εικόνα
+//Check if the file is a picture
 if(isset($_POST["submit"])) {
   $check1 = getimagesize($_FILES["movieLogo"]["tmp_name"]);
   $check2 = getimagesize($_FILES["movieCover"]["tmp_name"]);
@@ -28,19 +28,19 @@ if(isset($_POST["submit"])) {
     $uploadOk = 0;
   }
 
-  //Έλεγχος αν η εικόνα υπάρχει ήδη
+  //Check if the image already exists
   if ((file_exists($target_file1)) || (file_exists($target_file2)))  {
     phpAlert("Sorry, image file already exists.");
     $uploadOk = 0;
   }
 
-  //Έλεγχος του μεγέθους του αρχείου
+  //Check the file size
   if (($_FILES["movieLogo"]["size"] > 500000) || ($_FILES["movieCover"]["size"] > 500000))  {
     phpAlert("Sorry, your file(s) is(are) too large.");
     $uploadOk = 0;
   }
 
-  //Έλεγχος υποστήριξης του τύπου του αρχείου
+  //Check support for the file type
   if(($imageFile1Type != "jpg" && $imageFile1Type != "png" && $image1FileType != "jpeg"
   && $imageFile1Type != "gif" ) || ($imageFile2Type != "jpg" && $imageFile2Type != "png" && $image2FileType != "jpeg"
   && $imageFile2Type != "gif" )) {
@@ -48,13 +48,13 @@ if(isset($_POST["submit"])) {
     $uploadOk = 0;
   }
 
-  //Έλεγχος αν έχει υπάρξει αλλαγή στη τιμή της βοηθητικής μεταβλητής
+  //Check if there has been a change in the value of the auxiliary variable
   if ($uploadOk == 0) {
     phpAlert("Sorry, your image file(s) was(were) not uploaded.");
-  //Αν η τιμή έχει παραμείνει ίδια, γίνεται προσπάθεια μεταφόρτωσης της εικόνας
+  //If the value remains the same, an attempt is made to upload the image
   } else {
     if ((move_uploaded_file($_FILES["movieLogo"]["tmp_name"], $target_file1)) && (move_uploaded_file($_FILES["movieCover"]["tmp_name"], $target_file2))) {    
-      $moviepath = $_POST["movieLink"]; //Ανάθεση στη μεταβλητή $moviepath τα στοιχεία του πεδίου "movieLink" της φόρμας εισαγωγής ταινίας
+      $moviepath = $_POST["movieLink"]; //Assign to the variable $moviepath the elements of the "movieLink" field of the movie insertion form
       $movieTitle = $_POST["movieTitle"];
       $movieGenre = $_POST["movieGenre"];
       $movieDuration = $_POST["movieDuration"];
@@ -72,5 +72,5 @@ if(isset($_POST["submit"])) {
       }
     }
 }
-$db->close(); //Τερματισμός της σύνδεσης με τη βάση
+$db->close(); //End the connection to the database
 ?>
