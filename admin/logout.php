@@ -1,6 +1,6 @@
 <?php
-session_start(); //Εκκίνηση του session
-session_destroy(); //Κατάργηση του sesssion
+session_start(); //Start the session
+session_destroy(); //Remove sesssion
 
-header('Location: login.php'); //Ανακατεύθυνση στο login.php
+header('Location: login.php'); //Redirect to login.php
 ?>
