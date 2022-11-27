@@ -1,26 +1,25 @@
 <?php
-require '../database/Db.class.php'; //Κλήση του απαραίτητου για την σύνδεση με τη βάση δεδομένων και την εκτέλεση ερωτημάτων αρχείου κλάσης Db.class.php
-require '../includes/admin-movies-header.php'; //Κλήση του απαραίτητου για την εκτέλεση του παρακάτω κώδικα αρχείου, admin-movies-header.php 
+require '../database/Db.class.php'; //Call the necessary class file (Db.class.php) to connect to the database and run queries
+require '../includes/admin-movies-header.php'; //Call the file necessary to execute the following code, admin-header.php
 
-$db = new Db(); //Δημιουργία object της κλάσης Db
+$db = new Db(); //Create a Db class object
 
-$allBookingsTitle = $db->get_all_bookings_and_title(); //Αποθήκευση του αποτελέσματος της function get_all_bookings_and_title της κλάσης Db στη μεταβλητή $allBookingsTitle
+$allBookingsTitle = $db->get_all_bookings_and_title(); //Save the result of function get_all_bookings_and_title of the DB class in the variable $allBookingsTitle
  
-function phpAlert($msg) { //Δημιουργία της μεθόδου phpAlert που εμφανίζει ένα javascript alert που περιέχει ένα μήνυμα και στη συνέχεια ανακατευθύνει
+function phpAlert($msg) { //Create the phpAlert method that displays a javascript alert containing a message and then redirects
 	echo '<script type="text/javascript">alert("' . $msg . '");window.location = \'bookings.php\';</script>';
 }
 ?>
-    <div class="admin-section admin-section2" style="padding-bottom:90px;"> <!-- Div για το περιεχόμενο της σελίδας -->
-        <div class="admin-section-panel admin-section-panel2"> <!-- Div που περιέχει τη φόρμα κράτησης -->
+    <div class="admin-section admin-section2" style="padding-bottom:90px;"> <!-- Div for page content -->
+        <div class="admin-section-panel admin-section-panel2"> <!-- Div containing the booking form -->
                     <div class="admin-panel-section-header">
                         <h2>Create a Booking</h2>
                     </div>
-                    <form action="" method="POST" style="margin-top:15px;"> <!-- Δημιουργία φόρμας κράτησης -->                    
+                    <form action="" method="POST" style="margin-top:15px;"> <!-- Create the booking form -->                    
                         <select name="movieTitle">
-                        <?php
-                             
-                            $result = $db->get_all_movies(); //Αποθήκευση του αποτελέσματος της function get_all_movies της κλάσης Db στη μεταβλητή $result
-                            while ($row = mysqli_fetch_array($result)) {  //Όσο υπάρχουν εγγραφές, αυτές εισάγονται στη μεταβλητή $row και εμφανίζονται στα options του select field της φόρμας
+                        <?php                             
+                            $result = $db->get_all_movies(); //Save the result of function get_all_movies of the DB class in the $result variable
+                            while ($row = mysqli_fetch_array($result)) {  //As long as records exist, they are stored into the $row variable and appear in the select field options of the form
                                 echo "<option value=" . $row['movieTitle'] .">". $row['movieTitle'] ."</option>";
                             }
                         ?>
@@ -36,11 +35,11 @@ function phpAlert($msg) { //Δημιουργία της μεθόδου phpAlert 
                         <button type="submit" value="submit" name="submit" style="margin-top:25px;" class="form-btn">Create booking</button> 
                     </form>
                     <?php    
-                    if(isset($_POST['submit'])) //Έλεγχος αν έχει γίνει υποβολή των στοιχείων στη φόρμα κράτησης
+                    if(isset($_POST['submit'])) //Check if the details have been submitted to the booking form
                             {
-                                $movTitle = $_POST["movieTitle"]; //Ανάθεση της επιλεγμένης τιμής (value) των παραπάνω options στη μεταβλητή $movieTitle
+                                $movTitle = $_POST["movieTitle"]; //Assign the selected value of the above options to the variable $movieTitle
                                 $row2 = $db->get_movie_byTitle($movTitle);                         
-                                $id = $row2['movieID']; //Ανάθεση του id της επιλεγμένης εγγραφής στη μεταβλητή $id
+                                $id = $row2['movieID']; //Assign the id of the selected record to the variable $id
                                 $fname = $_POST["fname"];
                                 $lname = $_POST["lname"];
                                 $email = $_POST["email"];
@@ -55,14 +54,14 @@ function phpAlert($msg) { //Δημιουργία της μεθόδου phpAlert 
                             }
                         ?>
         </div>
-            <div class="admin-section-panel admin-section-panel1"> <!-- Div που περιέχει τα πεδία των ενεργών κρατήσεων -->
+            <div class="admin-section-panel admin-section-panel1"> <!-- Div containing the fields of active bookings -->
                         <div class="admin-panel-section-header">
                             <h2>Bookings</h2>
                         </div>
                         <div class="admin-panel-section-content">
                             <?php                            
                                 if(mysqli_num_rows($allBookingsTitle) > 0){
-                                    while($row = mysqli_fetch_array($allBookingsTitle)){ //Ανάθεση των περιεχωμένων της μεταβλητής $allBookingsTitle στη μεταβλητή $row και εμφάνιση των ζητούμενων αποτελεσμάτων όσο αυτή περιέχει τιμές
+                                    while($row = mysqli_fetch_array($allBookingsTitle)){ //Assign the contents of the $allBookingsTitle variable to the $row variable and display the requested results as long as it contains values
                                         echo "<div class=\"admin-panel-section-booking-item\"  style=\"margin: 10px 10px;\">\n";
                                         echo "      <div class=\"admin-panel-section-booking-info\">\n";
                                         echo "            <div>\n";
@@ -87,7 +86,7 @@ function phpAlert($msg) { //Δημιουργία της μεθόδου phpAlert 
                                         echo "                  <h4>Booking Date: ". $row['bookTimestamp'] ."</h4>\n";
                                         echo "            </div>\n";
                                         echo "      </div>\n";
-                                        echo "      <div class=\"admin-panel-section-booking-response\">\n";   //Επιλογή για διαγραφή κράτησης
+                                        echo "      <div class=\"admin-panel-section-booking-response\">\n";   //Option to delete a booking
                                         echo "            <a id='delbook' href='../includes/deleteBooking.php?id=".$row['bookingID']."'><i class=\"fas fa-times delete-icon\" style=\"height: 155px; line-height:150px;\" title=\"Delete booking\"></i></a>\n"; 
                                         echo "      </div>\n";
                                         echo "</div>";
@@ -95,7 +94,7 @@ function phpAlert($msg) { //Δημιουργία της μεθόδου phpAlert 
                                 } else{
                                     echo '<h4 class="no-annot">No Bookings right now</h4>';
                                 }   
-                            $db->close(); //Τερματισμός της σύνδεσης με τη βάση                                                   
+                            $db->close(); //End the connection to the database                                                 
                             ?>
                         </div>
             </div>
@@ -103,7 +102,7 @@ function phpAlert($msg) { //Δημιουργία της μεθόδου phpAlert 
     </div>
 
     <script>
-        $(function(){ //JQUERY που εμφανίζει μήνυμα επιβεβαίσης όταν ο χρήστης εκτελεί μία συσκεκριμένη ενέργεια (διαγραφή κράτησης)
+        $(function(){ //JQUERY showing confirmation message when user performs a specific action (delete booking)
             $('a#delbook').click(function(){
                 if(confirm('Are you sure you want to delete this booking?')) {
                     return true;
