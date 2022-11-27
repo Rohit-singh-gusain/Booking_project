@@ -1,7 +1,9 @@
 <?php
 session_start(); //Start the session
 require 'database/Db.class.php'; //Call the necessary class file (Db.class.php) to connect to the database and run queries
-$db = new Db(); 
+
+$db = new Db(); //Δημιουργία object της κλάσης Db
+
 function phpAlert($msg) { //Create the phpAlert method that displays a javascript alert containing a message and then redirects
 	echo '<script type="text/javascript">alert("' . $msg . '");window.location = \'login.php\';</script>';
 }
