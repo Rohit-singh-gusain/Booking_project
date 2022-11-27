@@ -6,7 +6,7 @@
         <div><a href="https://www.linkedin.com/in/chbandis/" target="_blank">Christos Bandis</a> - Metropolitan College 2021</div>  
     </footer>
 
-<script> //Javascript για τη σωστή λειτουργία του sticky header
+<script> //Javascript for sticky header to work properly
     window.onscroll = function() {myFunction()};
 
     var header = document.getElementById("header");
@@ -21,7 +21,7 @@
     }
 </script>
 <?php 
-$db->close(); //Τερματισμός της σύνδεσης με τη βάση
+$db->close(); //End the connection to the database
 ?>
 </body>    
 </html>
