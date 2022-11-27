@@ -4,12 +4,12 @@ require 'database/Db.class.php'; //Call the necessary class file (Db.class.php) 
 
 $db = new Db(); //Δημιουργία object της κλάσης Db
 
-function phpAlert($msg) { //Create the phpAlert method that displays a javascript alert containing a message and then redirects
-	echo '<script type="text/javascript">alert("' . $msg . '");window.location = \'login.php\';</script>';
-}
-
 if(isset($_SESSION['login'])){  //If a user login has occurred then redirect to index.php
 	header("Location: index.php");
+}
+
+function phpAlert($msg) { //Create the phpAlert method that displays a javascript alert containing a message and then redirects
+	echo '<script type="text/javascript">alert("' . $msg . '");window.location = \'login.php\';</script>';
 }
 
 ?>
