@@ -126,7 +126,7 @@ INSERT INTO `t_users` (`userID`, `firstName`, `lastName`, `username`, `phoneNumb
 (7, 'Χρήστος', 'Μπάντης', 'user', '6973979235', 'chr.bandis@gmail.com', '$2y$10$SojEi37etAsM1BXvYBj65u5UWDOLV0kw0Jh.d3cHKo18sPa1c.t3q');
 
 --
--- Ευρετήρια για άχρηστους πίνακες
+-- Indexes for unused tables
 --
 
 --
