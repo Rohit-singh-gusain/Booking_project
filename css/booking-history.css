@@ -6,7 +6,7 @@
     text-decoration: none;
     color: unset;
 }
-/* Div για τα περιεχόμενα της σελίδας */
+/* Div for page contents */
 .admin-section2 {
     display: flex;
     flex-wrap: wrap;
@@ -32,7 +32,7 @@
     padding: 20px;
     margin: 20px 0;
 }
-/* Τίτλος του παραπάνω div */
+/* Title of the above div */
 .admin-panel-section-header {
     display: flex;
     align-items: center;
@@ -44,7 +44,7 @@
     color: #432e8d;
 }
 
-/* Div που περιέχει τα bookings */
+/* Div containing the bookings */
 .admin-panel-section-booking-item {
     background-color: none;
     -webkit-border-radius: 6px;
