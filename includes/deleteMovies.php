@@ -1,11 +1,11 @@
 <?php 
-require '../database/Db.class.php'; //Κλήση του απαραίτητου για την σύνδεση με τη βάση δεδομένων και την εκτέλεση ερωτημάτων αρχείου κλάσης Db.class.php
+require '../database/Db.class.php'; //Call the necessary class file (Db.class.php) to connect to the database and run queries
 
 $db = new Db();
 
-$id = $_GET['id']; //Αποθήκευση στη μεταβλητή $id τα περιεχόμενα του "id" που αποστέλλεται μέσω της μεθόδου "GET" στο url     
+$id = $_GET['id']; //Store in the variable $id the contents of the "id" sent through the "GET" method in the url
 
-if ($db->delete_movie($id)) { //Αν εκτελεστεί η function τότε γίνεται ανακατεύθυνση στη συγκεκριμένη διεύθυνση, αλλιώς εμφανίζεται μήνυμα σφάλματος
+if ($db->delete_movie($id)) { //if the function is executed then the specified address is redirected otherwise an error message is displayed
     header('Location: ../admin/movies.php');
     exit;
 } 
