@@ -8,7 +8,7 @@
     {
         $username = "guest";
     }
-    $_SESSION['currenturl'] = $_SERVER['REQUEST_URI']; //Is a request made to the server to return the page link, which is inserted in the variable $_SESSION['currenturl']?
+    $_SESSION['currenturl'] = $_SERVER['REQUEST_URI']; //A request is made to the server to return the page link, which is entered in the variable $_SESSION['currenturl']
 ?>
 <!DOCTYPE html>
     <head>
