@@ -3,7 +3,7 @@
     <footer class="footer text-center">
         <br>
         <div><img src="images/logo-small.png"></div>
-        <a href="https://www.linkedin.com/in/chbandis/" target="_blank">Christos Bandis</a> - Metropolitan College 2021 
+        <a href="https://www.linkedin.com/in/chbandis/" target="_blank"></a> - dbuu college 
     </footer>
 
 <script> //Javascript for sticky header to work properly
