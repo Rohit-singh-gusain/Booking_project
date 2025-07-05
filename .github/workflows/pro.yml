@@ -3,7 +3,7 @@ name: Deploy to aws EC2
 on:
   push:
     branches:
-      - main  
+      - main  #frfrfr
 
 jobs:
   deploy:
