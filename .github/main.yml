@@ -1,0 +1,31 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main  # Change to your deployment branch if needed
+
+jobs:
+  deploy:
+    name: Deploy to EC2 Server
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up SSH key
+      run: |
+        echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
+        chmod 400 key.pem
+
+    - name: Copy Project Files to EC2
+      run: |
+        rsync -avz -e "ssh -i key.pem -o StrictHostKeyChecking=no" ./ ubuntu@15.168.241.3${{ secrets.EC2_HOST }}:/var/www/html/
+
+    - name: Restart Apache on EC2
+      run: |
+        ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@15.168.241.3${{ secrets.EC2_HOST }} "sudo systemctl restart apache2"
+
+    - name: Cleanup SSH key
+      run: rm -f key.pem
