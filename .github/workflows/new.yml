@@ -1,59 +1,75 @@
 name: Deploy PHP to AWS EC2
-
-on:
+'on':
   push:
-    branches: [ main ]
-  workflow_dispatch:
-
+    branches:
+      - main
+  workflow_dispatch: null
 env:
-  AWS_REGION: 'ap-northeast-3'
-  WEB_ROOT: '/var/www/html'
-  RDS_ENDPOINT: ${{ secrets.RDS_HOST }}
-  DB_NAME: ${{ secrets.DB_NAME }}
-
+  AWS_REGION: ap-northeast-3
+  WEB_ROOT: /var/www/html
+  RDS_ENDPOINT: '${{ secrets.RDS_HOST }}'
+  DB_NAME: '${{ secrets.DB_NAME }}'
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 30  # Increase timeout
+    timeout-minutes: 30
     strategy:
       max-parallel: 1
       fail-fast: false
-
     steps:
-    - name: Check GitHub Runner Status
-      run: |
-        echo "Checking GitHub status..."
-        curl -s https://www.githubstatus.com/api/v2/status.json | jq -r '.status.description'
-        echo "Proceeding with workflow..."
+      - name: Check GitHub Runner Status
+        run: >
+          echo "Checking GitHub status..."
 
-    - name: Checkout code
-      uses: actions/checkout@v3
-      timeout-minutes: 5
+          curl -s https://www.githubstatus.com/api/v2/status.json | jq -r
+          '.status.description'
 
-    - name: Verify Runner Environment
-      run: |
-        echo "Runner OS: $RUNNER_OS"
-        echo "Runner Temp: $RUNNER_TEMP"
-        df -h
-        free -m
+          echo "Proceeding with workflow..."
+      - name: Checkout code
+        uses: actions/checkout@v3
+        timeout-minutes: 5
+      - name: Verify Runner Environment
+        run: |
+          echo "Runner OS: $RUNNER_OS"
+          echo "Runner Temp: $RUNNER_TEMP"
+          df -h
+          free -m
+      - name: Check for composer.json
+        id: check-composer
+        run: |
+          if [ -f "composer.json" ]; then
+            echo "composer_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "composer_exists=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Install PHP dependencies
+        if: steps.check-composer.outputs.composer_exists == 'true'
+        timeout-minutes: 10
+        run: >
+          sudo apt-get update
 
-    - name: Check for composer.json
-      id: check-composer
-      run: |
-        if [ -f "composer.json" ]; then
-          echo "composer_exists=true" >> $GITHUB_OUTPUT
-        else
-          echo "composer_exists=false" >> $GITHUB_OUTPUT
-        fi
+          sudo apt-get install -y zip unzip jq
 
-    - name: Install PHP dependencies
-      if: steps.check-composer.outputs.composer_exists == 'true'
-      timeout-minutes: 10
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y zip unzip jq
-        curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-        composer install --no-dev --optimize-autoloader --no-interaction --no-progress
+          curl -sS https://getcomposer.org/installer | php --
+          --install-dir=/usr/local/bin --filename=composer
 
-    # Rest of your workflow steps...
-    # (Include all the remaining steps from the previous working version)
+          composer install --no-dev --optimize-autoloader --no-interaction
+          --no-progress
+      - name: Deploy to EC2 Apache Server
+        env:
+          PRIVATE_KEY: '${{ secrets.EC2_SSH_KEY }}'
+          HOST: '${{ secrets.EC2_HOST }}'
+          USER: '${{ secrets.EC2_USER }}'
+          WEB_ROOT: '${{ env.WEB_ROOT }}'
+        run: |
+          echo "$PRIVATE_KEY" > key.pem
+          chmod 400 key.pem
+
+          echo "Starting deployment to EC2 $HOST..."
+          rsync -avz --delete -e "ssh -i key.pem -o StrictHostKeyChecking=no" \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude 'key.pem' \
+            ./ $USER@$HOST:$WEB_ROOT
+
+          echo "Deployment complete."
